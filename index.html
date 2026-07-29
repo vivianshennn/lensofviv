@@ -293,7 +293,8 @@
     .btn-photo:hover, .btn-contact:hover { opacity: 0.85; }
 
     .nav-divider { display: none; }
-    body.page-home .nav-divider { display: block; }
+    body.page-home .nav-divider,
+    body.page-photography .nav-divider { display: block; }
 
     @media (max-width: 900px) {
       #about { height: auto; min-height: 100vh; }
@@ -350,13 +351,13 @@
     #photography { padding-top: 48px; }
     #photography.active { display: block; }
 
-    .photo-hero { width: 100%; padding: 32px 20px 22px; text-align: center; }
-    .photo-hero-title { display: flex; align-items: baseline; justify-content: center; gap: 16px; }
-    .ph-italic { font-family: 'Italianno', cursive; font-size: 80px; font-weight: 400; color: white; line-height: 1; }
+    .photo-hero { width: 100%; padding: 32px 20px; margin-top: 32px; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .photo-hero-title { display: flex; padding: 10px; align-items: center; justify-content: center; gap: 30px; }
+    .ph-italic { font-family: 'Italianno', cursive; font-size: 86px; font-weight: 400; letter-spacing: 2px; color: #FDFDF6; line-height: 1; }
 
     .ph-bold-wrap {
       position: relative; display: inline-block;
-      width: 286px; height: 82px; flex: 0 0 auto;
+      width: 246px; height: 71px; flex: 0 0 auto;
     }
     .photos-heading-svg {
       display: none; width: 100%; height: 100%; overflow: visible;
@@ -373,19 +374,34 @@
 
     .photo-tabs {
       display: flex; justify-content: center; gap: 36px;
-      padding: 18px 0 0; background: #faf8f4;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      margin-top: 44px; background: #FDFDF6;
     }
     .photo-tab {
-      font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400;
-      color: #666; cursor: pointer; padding-bottom: 14px;
-      border: none; border-bottom: 2px solid transparent;
-      background: none; transition: all 0.2s;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      font-style: normal;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
+      line-height: 1;
+      color: #000;
+      cursor: pointer;
+      padding-bottom: 14px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      background: none;
+      transition: all 0.2s;
     }
-    .photo-tab:hover { color: #1a1a1a; }
-    .photo-tab.active { color: #1a1a1a; font-weight: 600; border-bottom-color: #1a1a1a; }
+    .photo-tab:hover { color: #000; }
+    .photo-tab.active {
+      color: #000;
+      font-weight: 700;
+      font-synthesis: none;
+    }
 
-    .photo-grid-wrap { padding: 24px 28px 60px; background: #faf8f4; }
+    .photo-grid-wrap { padding: 24px 28px 60px; background: #FDFDF6; }
     .category-panel { display: none; }
     .category-panel.active { display: block; }
 
@@ -393,6 +409,91 @@
     .mgrid img { width: 100%; display: block; margin-bottom: 8px; break-inside: avoid; cursor: zoom-in; transition: opacity 0.2s; }
     .mgrid img:hover { opacity: 0.88; }
     .mgrid img.full { column-span: all; }
+
+    /* Curated Nature layout matching the portfolio mockup */
+    .nature-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-auto-flow: row;
+      gap: 18px;
+      width: 100%;
+    }
+
+    .nature-item {
+      overflow: hidden;
+      min-width: 0;
+      background: #FDFDF6;
+    }
+
+    .nature-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      cursor: zoom-in;
+      transition: opacity 0.2s;
+    }
+
+    .nature-item img:hover { opacity: 0.88; }
+
+    /* Three equal portrait images across */
+    .nature-third {
+      grid-column: span 2;
+      height: 430px;
+    }
+
+    /* Asymmetrical two-image row */
+    .nature-narrow {
+      grid-column: span 2;
+      height: 430px;
+    }
+
+    .nature-wide {
+      grid-column: span 4;
+      height: 430px;
+    }
+
+    /* Full-width editorial images */
+    .nature-full {
+      grid-column: 1 / -1;
+      height: 360px;
+    }
+
+    /* Two equal portrait images */
+    .nature-half {
+      grid-column: span 3;
+      height: 500px;
+    }
+
+    /* Small crop adjustments for the exact photographs */
+    .nature-birds img { object-position: center 58%; }
+    .nature-trees img { object-position: center 48%; }
+    .nature-flower img { object-position: center 50%; }
+    .nature-rocks img { object-position: center 55%; }
+    .nature-dogs img { object-position: center 48%; }
+    .nature-beach img { object-position: center 58%; }
+    .nature-mountains img { object-position: center 55%; }
+    .nature-water img { object-position: center 50%; }
+    .nature-city img { object-position: center 52%; }
+    .nature-sunset img { object-position: center 57%; }
+
+    @media (max-width: 900px) {
+      .nature-grid { grid-template-columns: 1fr; gap: 12px; }
+      .nature-third,
+      .nature-narrow,
+      .nature-wide,
+      .nature-full,
+      .nature-half {
+        grid-column: 1;
+        height: auto;
+      }
+      .nature-item img {
+        height: auto;
+        aspect-ratio: auto;
+        object-fit: contain;
+      }
+    }
 
     /* photography footer */
     .photo-footer {
@@ -632,21 +733,44 @@
 <div class="photo-grid-wrap">
 <!-- NATURE -->
 <div class="category-panel active" id="panel-nature">
-<div class="mgrid">
-<img alt="" onclick="openLightbox(this.src)" src="flower_sunset.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="DSC_5330-2.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="DSC_5552.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled--16.jpg"/>
-<img alt="" class="full" onclick="openLightbox(this.src)" src="untitled-.jpg"/>
-<img alt="" class="full" onclick="openLightbox(this.src)" src="untitled-2-nature.jpg"/>
-<img alt="" class="full" onclick="openLightbox(this.src)" src="untitled-8487.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled--20.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="sunrise___food-2.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled--11.jpg"/>
-<img alt="" class="full" onclick="openLightbox(this.src)" src="untitled-1572.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1668.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1710.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="IMG_4595.jpg"/>
+<div class="nature-grid">
+
+<div class="nature-item nature-third nature-flower">
+<img alt="Soft-focus flower with sunset bokeh" onclick="openLightbox(this.src)" src="flower sunset.jpg"/>
+</div>
+<div class="nature-item nature-third nature-trees">
+<img alt="Monterey trees framing the ocean" onclick="openLightbox(this.src)" src="DSC_5552.jpg"/>
+</div>
+<div class="nature-item nature-third nature-birds">
+<img alt="Shorebirds walking along the beach" onclick="openLightbox(this.src)" src="DSC_5330-2.jpg"/>
+</div>
+
+<div class="nature-item nature-narrow nature-rocks">
+<img alt="Moss-covered rocks beside the water" onclick="openLightbox(this.src)" src="untitled--16.jpg"/>
+</div>
+<div class="nature-item nature-wide nature-dogs">
+<img alt="People and dogs along the bay" onclick="openLightbox(this.src)" src="untitled-.jpg"/>
+</div>
+
+<div class="nature-item nature-full nature-beach">
+<img alt="Warm sunset over a quiet beach" onclick="openLightbox(this.src)" src="untitled-2.jpg"/>
+</div>
+
+<div class="nature-item nature-full nature-mountains">
+<img alt="Layered hills overlooking the bay" onclick="openLightbox(this.src)" src="untitled-8487.jpg"/>
+</div>
+
+<div class="nature-item nature-half nature-water">
+<img alt="Golden ripples moving across wet sand" onclick="openLightbox(this.src)" src="untitled--20.jpg"/>
+</div>
+<div class="nature-item nature-half nature-city">
+<img alt="San Francisco skyline framed by trees" onclick="openLightbox(this.src)" src="untitled--11.jpg"/>
+</div>
+
+<div class="nature-item nature-full nature-sunset">
+<img alt="Pink and orange sunset above distant hills" onclick="openLightbox(this.src)" src="sunrise + food-2.jpg"/>
+</div>
+
 </div>
 </div>
 <!-- PORTRAIT -->
