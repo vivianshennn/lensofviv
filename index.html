@@ -5,6 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>lensofviv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://use.typekit.net/mze4xdr.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&amp;family=Italianno&amp;family=Contrail+One&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&amp;display=swap" rel="stylesheet">
 <style>
@@ -160,8 +162,9 @@
 
       position: relative;
       display: flex;
-      width: 53.75%;
-      flex: 0 0 53.75%;
+      width: calc(53.75% + 4px);
+      flex: 0 0 calc(53.75% + 4px);
+      margin-left: -4px;
       align-items: center;
     }
 
@@ -240,12 +243,17 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 19px;
       font-weight: 300;
+      font-style: normal;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
       line-height: 1.2;
       color: #FDFDF6;
     }
 
     .about-text + .about-text { margin-top: 18px; }
-    .about-text strong { font-weight: 700; }
+    .about-text strong { font-weight: 700; font-synthesis: none; }
 
     .about-buttons {
       display: flex;
@@ -269,6 +277,11 @@
       font-size: 16px;
       font-style: normal;
       font-weight: 300;
+      font-style: normal;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
       line-height: 24px;
       letter-spacing: 2px;
       cursor: pointer;
