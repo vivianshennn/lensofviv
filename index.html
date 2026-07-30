@@ -751,6 +751,87 @@
       }
     }
 
+
+    /* Photography gallery navigation */
+    .photo-gallery-nav {
+      --gallery-accent: #7E7294;
+      width: 100%;
+      padding: 56px 6.25% 52px;
+      background: #FDFDF6;
+      text-align: center;
+      transition: color 0.35s ease;
+    }
+
+    .photo-gallery-nav.nav-nature { --gallery-accent: #7E7294; }
+    .photo-gallery-nav.nav-portrait { --gallery-accent: #30402E; }
+    .photo-gallery-nav.nav-creative { --gallery-accent: #1B192E; }
+    .photo-gallery-nav.nav-graduation { --gallery-accent: #252849; }
+
+    .photo-gallery-nav-kicker {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: #5f5f5a;
+      margin-bottom: 10px;
+    }
+
+    .photo-gallery-nav-title {
+      font-family: 'Italianno', cursive;
+      font-size: clamp(48px, 5vw, 70px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 2px;
+      color: var(--gallery-accent);
+      margin-bottom: 30px;
+    }
+
+    .photo-gallery-nav-links {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      width: min(940px, 100%);
+      margin: 0 auto;
+    }
+
+    .photo-gallery-nav-link {
+      min-height: 58px;
+      border: 1px solid var(--gallery-accent);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--gallery-accent);
+      font-family: 'ivymode', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+    }
+
+    .photo-gallery-nav-link:hover {
+      background: var(--gallery-accent);
+      color: #FDFDF6;
+      transform: translateY(-2px);
+    }
+
+    .photo-gallery-nav-link.active {
+      background: var(--gallery-accent);
+      color: #FDFDF6;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .photo-gallery-nav {
+        padding: 42px 20px 40px;
+      }
+
+      .photo-gallery-nav-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     /* Photography footer — based on the 1280 × 191 Figma design */
     .photo-footer {
       --footer-bg: #7E7294;
@@ -887,6 +968,18 @@
       transform: translateY(-1px);
     }
 
+    .photo-footer-socials{
+      position: relative;
+      top: -4px;
+      align-items: center;
+    }
+
+    .photo-footer-title{
+      display:flex;
+      align-items:center;
+    }
+
+
     .photo-footer-social svg {
       display: block;
       width: 100%;
@@ -1016,7 +1109,22 @@
       .ph-bold-wrap { width: 179px; height: 51px; }
       .mgrid { columns: 2; }
     }
-  </style>
+  
+    /* Preserve the original exported footer SVG artwork */
+    .photo-footer-social.instagram svg,
+    .photo-footer-social.linkedin svg,
+    .photo-footer-social.email svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: revert;
+      stroke: revert;
+      stroke-width: revert;
+      stroke-linecap: revert;
+      stroke-linejoin: revert;
+    }
+
+</style>
 </link></head>
 <body class="page-home">
 <!-- NAV -->
@@ -1352,6 +1460,18 @@
 </div>
 </div>
 </div>
+
+<div class="photo-gallery-nav nav-nature" id="photo-gallery-nav">
+  <p class="photo-gallery-nav-kicker">Finished browsing?</p>
+  <h2 class="photo-gallery-nav-title">explore another gallery</h2>
+  <div class="photo-gallery-nav-links" aria-label="Photography gallery navigation">
+    <button class="photo-gallery-nav-link active" data-tab="nature" onclick="navigatePhotoTab('nature', this)">Nature</button>
+    <button class="photo-gallery-nav-link" data-tab="portrait" onclick="navigatePhotoTab('portrait', this)">Portrait</button>
+    <button class="photo-gallery-nav-link" data-tab="creative" onclick="navigatePhotoTab('creative', this)">Creative</button>
+    <button class="photo-gallery-nav-link" data-tab="graduation" onclick="navigatePhotoTab('graduation', this)">Graduation</button>
+  </div>
+</div>
+
 <footer class="photo-footer footer-nature" id="photo-footer">
   <div class="photo-footer-inner">
     <div class="photo-footer-title">
@@ -1403,21 +1523,29 @@
 </div>
     </div>
     <div class="photo-footer-socials" aria-label="Social links">
-      <a class="photo-footer-social instagram" href="https://www.instagram.com/lensofviv" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg>
-      </a>
-      <a class="photo-footer-social linkedin" href="https://www.linkedin.com/in/vivian-shen-565006252/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect class="linkedin-box" x="2" y="2" width="20" height="20" rx="2.2"></rect>
-          <circle class="linkedin-mark" cx="7.1" cy="8" r="1.35"></circle>
-          <rect class="linkedin-mark" x="5.9" y="10.1" width="2.4" height="7.8" rx=".25"></rect>
-          <path class="linkedin-mark" d="M10.2 10.1h2.3v1.08c.7-.9 1.65-1.42 2.98-1.42 2.5 0 3.72 1.55 3.72 4.46v3.68h-2.42v-3.42c0-1.66-.48-2.54-1.72-2.54-1.4 0-2.42.95-2.42 2.85v3.11H10.2z"></path>
-        </svg>
-      </a>
-      <a class="photo-footer-social email" href="mailto:vivian.shen@berkeley.edu" aria-label="Email Vivian">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"></rect><path d="m4.5 7 7.5 6 7.5-6"></path></svg>
-      </a>
-    </div>
+  <a class="photo-footer-social instagram" href="https://www.instagram.com/lensofviv" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.03017 0.0839254C5.75336 0.144166 4.88143 0.347926 4.11918 0.647447C3.33029 0.954888 2.66165 1.36745 1.99636 2.03513C1.33107 2.70281 0.921389 3.37194 0.616106 4.16202C0.320663 4.92594 0.120501 5.79859 0.0641001 7.07611C0.00769954 8.35363 -0.00478059 8.76428 0.00145947 12.023C0.00769954 15.2817 0.0220997 15.6902 0.0840203 16.9704C0.144981 18.2469 0.348023 19.1186 0.647546 19.8811C0.955469 20.67 1.36755 21.3384 2.03548 22.0039C2.70341 22.6694 3.37205 23.0782 4.16406 23.3839C4.92727 23.6789 5.80016 23.88 7.07745 23.9359C8.35475 23.9918 8.76587 24.0048 12.0237 23.9986C15.2815 23.9923 15.6916 23.9779 16.9716 23.9172C18.2515 23.8565 19.1186 23.652 19.8813 23.3539C20.6702 23.0453 21.3391 22.6339 22.0042 21.9658C22.6692 21.2976 23.0787 20.628 23.3837 19.8374C23.6794 19.0742 23.8803 18.2013 23.9357 16.925C23.9916 15.6441 24.0048 15.2352 23.9986 11.9769C23.9923 8.71868 23.9777 8.31019 23.917 7.03051C23.8563 5.75083 23.653 4.88178 23.3537 4.11882C23.0453 3.32994 22.6337 2.66201 21.966 1.99601C21.2983 1.33001 20.6282 0.920808 19.8379 0.616487C19.0742 0.321046 18.2018 0.119686 16.9245 0.0644854C15.6472 0.00928517 15.2361 -0.00487488 11.9771 0.00136514C8.71811 0.00760516 8.3101 0.0215252 7.03017 0.0839254ZM7.17033 21.7771C6.00032 21.7262 5.36503 21.5318 4.94167 21.3691C4.38102 21.1531 3.98166 20.892 3.55974 20.4742C3.13781 20.0563 2.87861 19.6555 2.65973 19.0961C2.49532 18.6727 2.29732 18.0381 2.2426 16.8681C2.18308 15.6036 2.1706 15.2239 2.16364 12.0201C2.15668 8.81636 2.16892 8.43715 2.22436 7.17211C2.27428 6.00307 2.46988 5.36706 2.63237 4.94394C2.84837 4.38258 3.10853 3.98394 3.52734 3.56226C3.94614 3.14058 4.34574 2.8809 4.90567 2.66201C5.32855 2.49689 5.96312 2.30057 7.13265 2.24489C8.39819 2.18489 8.77739 2.17289 11.9807 2.16593C15.184 2.15897 15.5642 2.17097 16.8302 2.22665C17.9992 2.27753 18.6355 2.47121 19.0581 2.63465C19.619 2.85065 20.0181 3.1101 20.4398 3.52962C20.8615 3.94914 21.1214 4.3473 21.3403 4.90842C21.5057 5.3301 21.702 5.96443 21.7572 7.13467C21.8174 8.40019 21.8311 8.77964 21.8369 11.9827C21.8426 15.1857 21.8314 15.5661 21.7759 16.8307C21.7248 18.0007 21.5309 18.6362 21.3679 19.0601C21.1519 19.6205 20.8915 20.0201 20.4725 20.4415C20.0534 20.863 19.6543 21.1226 19.0941 21.3415C18.6717 21.5064 18.0364 21.7032 16.8679 21.7589C15.6023 21.8184 15.2231 21.8309 12.0186 21.8378C8.81411 21.8448 8.43587 21.8318 7.17033 21.7771ZM16.9531 5.58642C16.9535 5.87125 17.0385 6.14954 17.1971 6.38609C17.3558 6.62265 17.581 6.80684 17.8443 6.91538C18.1077 7.02391 18.3973 7.05192 18.6765 6.99585C18.9558 6.93978 19.2122 6.80216 19.4132 6.60039C19.6142 6.39862 19.7509 6.14176 19.806 5.8623C19.861 5.58285 19.8319 5.29334 19.7224 5.03041C19.6129 4.76747 19.4279 4.54291 19.1908 4.38514C18.9536 4.22736 18.675 4.14345 18.3902 4.14402C18.0084 4.14478 17.6425 4.29716 17.373 4.56765C17.1035 4.83814 16.9524 5.20459 16.9531 5.58642ZM5.83856 12.012C5.84528 15.4152 8.60915 18.1677 12.0117 18.1613C15.4142 18.1548 18.1687 15.3912 18.1622 11.988C18.1557 8.58475 15.3911 5.83147 11.9881 5.83819C8.58515 5.84491 5.83208 8.60924 5.83856 12.012ZM8.00002 12.0076C7.99846 11.2165 8.23153 10.4427 8.66977 9.78399C9.108 9.12531 9.73172 8.61137 10.462 8.30717C11.1924 8.00296 11.9965 7.92216 12.7728 8.07496C13.549 8.22777 14.2625 8.60733 14.823 9.16565C15.3836 9.72396 15.766 10.436 15.9218 11.2116C16.0777 11.9872 16.0001 12.7917 15.6988 13.5232C15.3975 14.2547 14.886 14.8804 14.2291 15.3213C13.5721 15.7621 12.7992 15.9983 12.0081 15.9998C11.4827 16.0009 10.9623 15.8985 10.4766 15.6985C9.99086 15.4985 9.54928 15.2047 9.17709 14.834C8.80489 14.4632 8.50938 14.0228 8.30741 13.5379C8.10545 13.0529 8.001 12.533 8.00002 12.0076Z" fill="white"/>
+</svg>
+  </a>
+  <a class="photo-footer-social linkedin" href="https://www.linkedin.com/in/vivian-shen-565006252/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_27_768)">
+<path d="M22.2234 0H1.77187C0.792187 0 0 0.773438 0 1.72969V22.2656C0 23.2219 0.792187 24 1.77187 24H22.2234C23.2031 24 24 23.2219 24 22.2703V1.72969C24 0.773438 23.2031 0 22.2234 0ZM7.12031 20.4516H3.55781V8.99531H7.12031V20.4516ZM5.33906 7.43438C4.19531 7.43438 3.27188 6.51094 3.27188 5.37187C3.27188 4.23281 4.19531 3.30937 5.33906 3.30937C6.47813 3.30937 7.40156 4.23281 7.40156 5.37187C7.40156 6.50625 6.47813 7.43438 5.33906 7.43438ZM20.4516 20.4516H16.8937V14.8828C16.8937 13.5562 16.8703 11.8453 15.0422 11.8453C13.1906 11.8453 12.9094 13.2937 12.9094 14.7891V20.4516H9.35625V8.99531H12.7687V10.5609H12.8156C13.2891 9.66094 14.4516 8.70938 16.1813 8.70938C19.7859 8.70938 20.4516 11.0813 20.4516 14.1656V20.4516Z" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_27_768">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+  </a>
+  <a class="photo-footer-social email" href="mailto:vivian.shen@berkeley.edu" aria-label="Email Vivian">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M18.0988 0.152281C16.8239 -1.78814e-05 15.2169 -9.88738e-06 13.1668 1.62876e-07H10.8332C8.78312 -9.88738e-06 7.17613 -1.78814e-05 5.90118 0.152281C4.60012 0.3077 3.54593 0.630553 2.64584 1.35157C2.10094 1.78807 1.62174 2.31642 1.22584 2.91721C1.04536 3.1911 0.890803 3.48038 0.758926 3.78827C0.35507 4.73113 0.174933 5.82445 0.087142 7.12822C-5.03174e-06 8.42244 -2.71331e-06 10.0089 1.47725e-07 11.965V12.0557C-8.96763e-06 14.316 -1.6218e-05 16.0879 0.138115 17.4936C0.279077 18.9281 0.571897 20.0904 1.22584 21.0828C1.62174 21.6836 2.10094 22.2119 2.64584 22.6484C3.54593 23.3694 4.60012 23.6923 5.90118 23.8477C7.1761 24 8.78307 24 10.8331 24H13.1668C15.2168 24 16.8239 24 18.0988 23.8477C19.3999 23.6923 20.4541 23.3694 21.3542 22.6484C21.8991 22.2119 22.3783 21.6836 22.7742 21.0828C23.4281 20.0904 23.7209 18.9281 23.8619 17.4936C24 16.0879 24 14.3161 24 12.0558V11.9642C24 9.99474 24 8.39982 23.911 7.10036C23.8212 5.79084 23.637 4.69389 23.2238 3.74826C23.0957 3.45519 22.9467 3.17912 22.7742 2.91721C22.3783 2.31642 21.8991 1.78807 21.3542 1.35157C20.4541 0.630553 19.3999 0.3077 18.0988 0.152281ZM3.63004 2.84514C4.19712 2.39088 4.92294 2.12609 6.08154 1.98769C7.25581 1.84742 8.7722 1.84615 10.8837 1.84615H13.1163C15.2278 1.84615 16.7442 1.84742 17.9185 1.98769C19.0771 2.12609 19.8029 2.39088 20.37 2.84514C20.7725 3.16762 21.1266 3.55792 21.4191 4.00172L19.3013 6.33675C17.4241 8.40648 16.0745 9.89173 14.9104 10.871C13.7657 11.834 12.8993 12.2202 12 12.2202C11.1007 12.2202 10.2343 11.834 9.08958 10.871C7.92552 9.89173 6.57591 8.40648 4.69871 6.33674L2.5809 4.00172C2.87344 3.55792 3.22748 3.16762 3.63004 2.84514ZM22.0881 5.87492C22.1556 6.26905 22.2056 6.71866 22.2413 7.23944C22.325 8.46145 22.3256 9.98748 22.3256 12C22.3256 14.3281 22.3244 16 22.1972 17.2947C22.0717 18.5721 21.8315 19.3724 21.4195 19.9976C21.1269 20.4417 20.7727 20.8322 20.37 21.1549C19.8029 21.6091 19.0771 21.8739 17.9185 22.0123C16.7442 22.1526 15.2278 22.1538 13.1163 22.1538H10.8837C8.7722 22.1538 7.25581 22.1526 6.08154 22.0123C4.92294 21.8739 4.19712 21.6091 3.63004 21.1549C3.22729 20.8322 2.8731 20.4417 2.58048 19.9976C2.16847 19.3724 1.92832 18.5721 1.80279 17.2947C1.67557 16 1.67442 14.3281 1.67442 12C1.67442 10.0018 1.67494 8.483 1.75697 7.26491C1.79276 6.73335 1.84333 6.27551 1.91186 5.87492L3.56 7.6921C5.38208 9.70107 6.81 11.2755 8.07391 12.3387C9.3676 13.427 10.5874 14.0664 12 14.0664C13.4126 14.0664 14.6324 13.427 15.9261 12.3387C17.19 11.2755 18.6179 9.70109 20.44 7.69213L22.0881 5.87492Z" fill="white"/>
+</svg>
+  </a>
+</div>
   </div>
 </footer>
 </section>
@@ -1539,8 +1667,26 @@
     hero.className = 'photo-hero ' + tabHero[tab];
     const footer = document.getElementById('photo-footer');
     if (footer) footer.className = 'photo-footer footer-' + tab;
+
+    const galleryNav = document.getElementById('photo-gallery-nav');
+    if (galleryNav) {
+      galleryNav.className = 'photo-gallery-nav nav-' + tab;
+      galleryNav.querySelectorAll('.photo-gallery-nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.tab === tab);
+      });
+    }
+
     document.body.classList.remove('cat-nature', 'cat-portrait', 'cat-creative', 'cat-graduation');
     document.body.classList.add('cat-' + tab);
+  }
+
+
+  function navigatePhotoTab(tab, el) {
+    const topTab = document.querySelector('.photo-tab[onclick*="switchTab(\'' + tab + '\'"]');
+    if (topTab) {
+      switchTab(tab, topTab);
+      document.getElementById('photo-hero').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // Lightbox
