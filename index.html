@@ -402,7 +402,7 @@
       font-synthesis: none;
     }
 
-    .photo-grid-wrap { padding: 24px 28px 60px; background: #FDFDF6; }
+    .photo-grid-wrap { padding: 24px 28px 0; background: #FDFDF6; }
     .category-panel { display: none; }
     .category-panel.active { display: block; }
 
@@ -413,7 +413,7 @@
 
     /* Exact responsive Nature layout based on the 1154px-wide Figma frame */
     .photo-grid-wrap {
-      padding: 24px 0 60px;
+      padding: 24px 0 0;
       background: #FDFDF6;
     }
 
@@ -756,7 +756,7 @@
     .photo-gallery-nav {
       --gallery-accent: #7E7294;
       width: 100%;
-      padding: 56px 6.25% 52px;
+      padding: 52px 6.25% 52px;
       background: #FDFDF6;
       text-align: center;
       transition: color 0.35s ease;
@@ -1054,7 +1054,7 @@
     .social-icon { cursor: pointer; opacity: 0.8; transition: opacity 0.2s; display: flex; align-items: center; }
     .social-icon:hover { opacity: 1; }
     .social-icon svg { width: 16px; height: 16px; fill: white; }
-    .contact-divider { width: 1px; background: #FFF; align-self: stretch; }
+    .contact-divider { width: 1px; background: rgba(255,255,255,0.8); align-self: stretch; }
 
     .contact-fields { --form-width:599px; width:var(--form-width); display:flex; flex-direction:column; gap:10px; }
     .field-input {
@@ -1122,20 +1122,6 @@
       stroke-width: revert;
       stroke-linecap: revert;
       stroke-linejoin: revert;
-    }
-
-
-    /* Fine-tuned spacing and contact divider */
-    .photo-grid-wrap {
-      padding-bottom: 0;
-    }
-
-    .photo-gallery-nav {
-      padding-top: 24px;
-    }
-
-    .contact-divider {
-      background: rgba(255, 255, 255, 0.8);
     }
 
 </style>
@@ -1628,8 +1614,11 @@
 <script>
   const pages = ['home','about','photography','contact'];
   const logoColors = { home:'#17292B', about:'#003557', photography:'#403858', contact:'#364633' };
+  let currentPage = 'home';
 
   function showPage(name) {
+    const previousPage = currentPage;
+    currentPage = name;
     pages.forEach(p => {
       document.getElementById(p).classList.remove('active');
       document.getElementById('nav-'+p).classList.remove('active');
@@ -1642,38 +1631,34 @@
       const cat = activeTab ? activeTab.dataset.tab : 'nature';
       document.body.classList.add('cat-' + cat);
     }
+    if (name === 'home' && previousPage !== 'home') {
+      setHomeImg(0);
+    }
     window.scrollTo(0,0);
   }
 
   // Home image cycling
   const homeImgs = ['IMG_4595.jpg','untitled-1572.jpg','untitled-1668.jpg','untitled-1710.jpg'];
-  const homeCycleDelay = 4500;
   let curImg = 0;
-  let homeCycleTimer;
 
-  function startHomeCycle() {
-    clearTimeout(homeCycleTimer);
-    homeCycleTimer = setTimeout(() => {
-      setHomeImg(curImg + 1, false);
-      startHomeCycle();
-    }, homeCycleDelay);
-  }
-
-  function setHomeImg(i, resetCountdown = true) {
+  function setHomeImg(i) {
     curImg = (i + homeImgs.length) % homeImgs.length;
     const img = document.getElementById('home-img');
     img.style.opacity = 0;
     setTimeout(() => { img.src = homeImgs[curImg]; img.style.opacity = 1; }, 300);
     document.querySelectorAll('.home-dot').forEach((d,idx) => d.classList.toggle('active', idx===curImg));
-
-    if (resetCountdown) startHomeCycle();
+    startHomeInterval();
   }
-
   function nextImg() { setHomeImg(curImg + 1); }
   function prevImg() { setHomeImg(curImg - 1); }
 
-  // Auto-cycle; every manual arrow or dot click restarts the full countdown.
-  startHomeCycle();
+  // Auto-cycle (restartable so manual navigation resets the countdown)
+  let homeInterval;
+  function startHomeInterval() {
+    clearInterval(homeInterval);
+    homeInterval = setInterval(() => setHomeImg(curImg + 1), 4500);
+  }
+  startHomeInterval();
 
   // Arrow key navigation
   document.addEventListener('keydown', e => {
