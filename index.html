@@ -1124,6 +1124,20 @@
       stroke-linejoin: revert;
     }
 
+
+    /* Fine-tuned spacing and contact divider */
+    .photo-grid-wrap {
+      padding-bottom: 0;
+    }
+
+    .photo-gallery-nav {
+      padding-top: 24px;
+    }
+
+    .contact-divider {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
 </style>
 </link></head>
 <body class="page-home">
@@ -1633,20 +1647,33 @@
 
   // Home image cycling
   const homeImgs = ['IMG_4595.jpg','untitled-1572.jpg','untitled-1668.jpg','untitled-1710.jpg'];
+  const homeCycleDelay = 4500;
   let curImg = 0;
+  let homeCycleTimer;
 
-  function setHomeImg(i) {
+  function startHomeCycle() {
+    clearTimeout(homeCycleTimer);
+    homeCycleTimer = setTimeout(() => {
+      setHomeImg(curImg + 1, false);
+      startHomeCycle();
+    }, homeCycleDelay);
+  }
+
+  function setHomeImg(i, resetCountdown = true) {
     curImg = (i + homeImgs.length) % homeImgs.length;
     const img = document.getElementById('home-img');
     img.style.opacity = 0;
     setTimeout(() => { img.src = homeImgs[curImg]; img.style.opacity = 1; }, 300);
     document.querySelectorAll('.home-dot').forEach((d,idx) => d.classList.toggle('active', idx===curImg));
+
+    if (resetCountdown) startHomeCycle();
   }
+
   function nextImg() { setHomeImg(curImg + 1); }
   function prevImg() { setHomeImg(curImg - 1); }
 
-  // Auto-cycle
-  setInterval(() => setHomeImg(curImg + 1), 4500);
+  // Auto-cycle; every manual arrow or dot click restarts the full countdown.
+  startHomeCycle();
 
   // Arrow key navigation
   document.addEventListener('keydown', e => {
