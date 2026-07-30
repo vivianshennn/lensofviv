@@ -557,6 +557,63 @@
       }
     }
 
+    /* Exact Graduation tab layout, from the dev-mode measurements:
+       3-col row 1152x512, 326fr/794fr row x568,
+       3-col row 1152x520, 502fr/618fr row x517. */
+    #panel-graduation {
+      width: 100%;
+    }
+
+    .graduation-grid {
+      width: 91.139241%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(14px, 2.531646vw, 32px);
+    }
+
+    .graduation-row {
+      display: grid;
+      width: 100%;
+      gap: clamp(14px, 2.531646vw, 32px);
+      min-width: 0;
+    }
+
+    .graduation-row-three-a { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); aspect-ratio: 1152 / 512; }
+    .graduation-row-two-a { grid-template-columns: minmax(0, 326fr) minmax(0, 794fr); aspect-ratio: 1152 / 568; }
+    .graduation-row-three-b { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); aspect-ratio: 1152 / 520; }
+    .graduation-row-two-b { grid-template-columns: minmax(0, 502fr) minmax(0, 618fr); aspect-ratio: 1152 / 517; }
+
+    .graduation-item {
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      background: #FDFDF6;
+    }
+
+    .graduation-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      cursor: zoom-in;
+      transition: opacity 0.2s;
+    }
+
+    .graduation-item img:hover { opacity: 0.88; }
+
+    @media (max-width: 900px) {
+      .graduation-grid {
+        width: calc(100% - 40px);
+        gap: 16px;
+      }
+
+      .graduation-row {
+        gap: 16px;
+      }
+    }
+
     @media (max-width: 620px) {
       .portrait-grid {
         width: calc(100% - 24px);
@@ -1242,17 +1299,50 @@
 </div>
 <!-- GRADUATION -->
 <div class="category-panel" id="panel-graduation">
-<div class="mgrid">
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1868.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1791.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1806.jpg"/>
-<img alt="" class="full" onclick="openLightbox(this.src)" src="untitled-1780.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1814.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1870.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1910.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1948.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-1963.jpg"/>
-<img alt="" class="full" onclick="openLightbox(this.src)" src="untitled-1969.jpg"/>
+<div class="graduation-grid">
+
+<div class="graduation-row graduation-row-three-a">
+  <div class="graduation-item">
+    <img alt="Standing among library bookshelves, wearing a Berkeley stole" onclick="openLightbox(this.src)" src="untitled-1870.jpg"/>
+  </div>
+  <div class="graduation-item">
+    <img alt="Sitting on an antique piano bench in front of a sunlit window" onclick="openLightbox(this.src)" src="untitled-1868.jpg"/>
+  </div>
+  <div class="graduation-item">
+    <img alt="Perched on a ledge in front of the Campanile, holding the stole up" onclick="openLightbox(this.src)" src="untitled-1910.jpg"/>
+  </div>
+</div>
+
+<div class="graduation-row graduation-row-two-a">
+  <div class="graduation-item">
+    <img alt="Standing in the grass in front of the full Campanile tower" onclick="openLightbox(this.src)" src="untitled-1963.jpg"/>
+  </div>
+  <div class="graduation-item">
+    <img alt="Leaning on the Rausser College of Natural Resources sign" onclick="openLightbox(this.src)" src="untitled-1780.jpg"/>
+  </div>
+</div>
+
+<div class="graduation-row graduation-row-three-b">
+  <div class="graduation-item">
+    <img alt="Standing in a grand archway entrance" onclick="openLightbox(this.src)" src="untitled-1814.jpg"/>
+  </div>
+  <div class="graduation-item">
+    <img alt="Waving the Berkeley stole up against a building facade" onclick="openLightbox(this.src)" src="untitled-1948.jpg"/>
+  </div>
+  <div class="graduation-item">
+    <img alt="Walking away under blossoming trees, stole over one shoulder" onclick="openLightbox(this.src)" src="untitled-1791.jpg"/>
+  </div>
+</div>
+
+<div class="graduation-row graduation-row-two-b">
+  <div class="graduation-item">
+    <img alt="Smiling together with a friend, both wearing Berkeley stoles" onclick="openLightbox(this.src)" src="untitled-1969.jpg"/>
+  </div>
+  <div class="graduation-item">
+    <img alt="Standing under Sather Gate" onclick="openLightbox(this.src)" src="untitled-1806.jpg"/>
+  </div>
+</div>
+
 </div>
 </div>
 </div>
