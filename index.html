@@ -498,6 +498,65 @@
       }
     }
 
+    /* Exact Creative tab layout, from the dev-mode measurements:
+       hero 1152x600.5, 3-col row 1152x491 (equal thirds),
+       2-col row 456fr/664fr x637, full-width 1152x512,
+       2-col row 540fr/580fr x574. */
+    #panel-creative {
+      width: 100%;
+    }
+
+    .creative-grid {
+      width: 91.139241%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(14px, 2.531646vw, 32px);
+    }
+
+    .creative-row {
+      display: grid;
+      width: 100%;
+      gap: clamp(14px, 2.531646vw, 32px);
+      min-width: 0;
+    }
+
+    .creative-row-full-a { grid-template-columns: minmax(0, 1fr); aspect-ratio: 1152 / 600.5; }
+    .creative-row-three { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); aspect-ratio: 1152 / 491; }
+    .creative-row-two-a { grid-template-columns: minmax(0, 456fr) minmax(0, 664fr); aspect-ratio: 1152 / 637; }
+    .creative-row-full-b { grid-template-columns: minmax(0, 1fr); aspect-ratio: 1152 / 512; }
+    .creative-row-two-b { grid-template-columns: minmax(0, 540fr) minmax(0, 580fr); aspect-ratio: 1152 / 574; }
+
+    .creative-item {
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      background: #FDFDF6;
+    }
+
+    .creative-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      cursor: zoom-in;
+      transition: opacity 0.2s;
+    }
+
+    .creative-item img:hover { opacity: 0.88; }
+
+    @media (max-width: 900px) {
+      .creative-grid {
+        width: calc(100% - 40px);
+        gap: 16px;
+      }
+
+      .creative-row {
+        gap: 16px;
+      }
+    }
+
     @media (max-width: 620px) {
       .portrait-grid {
         width: calc(100% - 24px);
@@ -678,16 +737,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: clamp(9px, 0.9375vw, 12px);
-      transform: translateY(1px);
+      gap: 20px;
     }
 
     .photo-footer-title {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 32px;
-      width: 397px;
+      gap: 28px;
+      width: auto;
       height: 68px;
       white-space: nowrap;
       line-height: normal;
@@ -696,6 +754,7 @@
     .photo-footer-script {
       width: 126px;
       height: 68px;
+      transform: translateY(6px);
       flex: 0 0 126px;
       display: flex;
       align-items: center;
@@ -880,6 +939,10 @@
     body.page-home .nav-logo     { color: #17292B; }
     body.page-about .nav-logo    { color: #003557; }
     body.page-photography .nav-logo { color: #403858; }
+    body.page-photography.cat-nature .nav-logo     { color: #7E7294; }
+    body.page-photography.cat-portrait .nav-logo   { color: #30402E; }
+    body.page-photography.cat-creative .nav-logo   { color: #1B192E; }
+    body.page-photography.cat-graduation .nav-logo { color: #252849; }
     body.page-contact .nav-logo  { color: #364633; }
 
     @media (max-width: 900px) {
@@ -1033,10 +1096,10 @@
 </div>
 </div>
 <div class="photo-tabs">
-<button class="photo-tab active" onclick="switchTab('nature',this)">Nature</button>
-<button class="photo-tab" onclick="switchTab('portrait',this)">Portrait</button>
-<button class="photo-tab" onclick="switchTab('creative',this)">Creative</button>
-<button class="photo-tab" onclick="switchTab('graduation',this)">Graduation</button>
+<button class="photo-tab active" data-tab="nature" onclick="switchTab('nature',this)">Nature</button>
+<button class="photo-tab" data-tab="portrait" onclick="switchTab('portrait',this)">Portrait</button>
+<button class="photo-tab" data-tab="creative" onclick="switchTab('creative',this)">Creative</button>
+<button class="photo-tab" data-tab="graduation" onclick="switchTab('graduation',this)">Graduation</button>
 </div>
 <div class="photo-grid-wrap">
 <!-- NATURE -->
@@ -1131,16 +1194,50 @@
 </div>
 <!-- CREATIVE -->
 <div class="category-panel" id="panel-creative">
-<div class="mgrid">
-<img alt="" class="full" onclick="openLightbox(this.src)" src="20250920-DSC_5844.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="20250920-DSC_5851.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled--12.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="20250920-DSC_5862.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="creative-fishbowl.jpg"/>
-<img alt="" class="full" onclick="openLightbox(this.src)" src="untitled--39.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled--43.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled--25.jpg"/>
-<img alt="" onclick="openLightbox(this.src)" src="untitled-2-28.jpg"/>
+<div class="creative-grid">
+
+<div class="creative-row creative-row-full-a">
+  <div class="creative-item">
+    <img alt="Woman lit in blue and red light, eyes closed" onclick="openLightbox(this.src)" src="20250920-DSC_5844.jpg"/>
+  </div>
+</div>
+
+<div class="creative-row creative-row-three">
+  <div class="creative-item">
+    <img alt="Woman illuminated in purple light, looking down" onclick="openLightbox(this.src)" src="untitled-2-28.jpg"/>
+  </div>
+  <div class="creative-item">
+    <img alt="Girl holding a CD over one eye, golden light" onclick="openLightbox(this.src)" src="20250920-DSC_5851.jpg"/>
+  </div>
+  <div class="creative-item">
+    <img alt="Blurred motion portrait in green and warm light" onclick="openLightbox(this.src)" src="20250920-DSC_5862.jpg"/>
+  </div>
+</div>
+
+<div class="creative-row creative-row-two-a">
+  <div class="creative-item">
+    <img alt="Close-up of a fishbowl with toy goldfish under neon light" onclick="openLightbox(this.src)" src="untitled--12.jpg"/>
+  </div>
+  <div class="creative-item">
+    <img alt="Girl smiling behind a fishbowl of toy fish" onclick="openLightbox(this.src)" src="untitled-2.jpg"/>
+  </div>
+</div>
+
+<div class="creative-row creative-row-full-b">
+  <div class="creative-item">
+    <img alt="Woman holding a sparkler on a rooftop at night" onclick="openLightbox(this.src)" src="untitled--43.jpg"/>
+  </div>
+</div>
+
+<div class="creative-row creative-row-two-b">
+  <div class="creative-item">
+    <img alt="Silhouette of a woman with a sparkler, warm bokeh lights" onclick="openLightbox(this.src)" src="untitled--39.jpg"/>
+  </div>
+  <div class="creative-item">
+    <img alt="Profile portrait of a woman holding a sparkler at night" onclick="openLightbox(this.src)" src="untitled--25.jpg"/>
+  </div>
+</div>
+
 </div>
 </div>
 <!-- GRADUATION -->
@@ -1302,6 +1399,11 @@
     document.getElementById(name).classList.add('active');
     document.getElementById('nav-'+name).classList.add('active');
     document.body.className = 'page-' + name;
+    if (name === 'photography') {
+      const activeTab = document.querySelector('.photo-tab.active');
+      const cat = activeTab ? activeTab.dataset.tab : 'nature';
+      document.body.classList.add('cat-' + cat);
+    }
     window.scrollTo(0,0);
   }
 
@@ -1341,6 +1443,8 @@
     hero.className = 'photo-hero ' + tabHero[tab];
     const footer = document.getElementById('photo-footer');
     if (footer) footer.className = 'photo-footer footer-' + tab;
+    document.body.classList.remove('cat-nature', 'cat-portrait', 'cat-creative', 'cat-graduation');
+    document.body.classList.add('cat-' + tab);
   }
 
   // Lightbox
