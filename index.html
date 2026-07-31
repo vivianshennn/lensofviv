@@ -1736,6 +1736,48 @@
       }
     }
 
+
+    /* ══ PHONE ABOUT REFINEMENTS — spacing, type, and exact button centering ══ */
+    @media (max-width: 640px) {
+      .about-panels {
+        --mobile-about-gap: 36px;
+      }
+
+      /* Equal box-to-box spacing above the first paragraph and above the buttons. */
+      .about-copy-stack {
+        margin-top: var(--mobile-about-gap) !important;
+      }
+
+      .about-buttons {
+        margin-top: var(--mobile-about-gap) !important;
+      }
+
+      /* The previous phone body size was 15.5px; increase it by exactly 4px. */
+      .about-text {
+        font-size: 19.5px !important;
+      }
+
+      /* Center the label box geometrically inside each button. */
+      .btn-photo,
+      .btn-contact {
+        position: relative;
+        display: grid;
+        place-items: center;
+        padding-left: 12px;
+        padding-right: 12px;
+        text-align: center;
+      }
+
+      .btn-photo .btn-label,
+      .btn-contact .btn-label {
+        display: block;
+        width: max-content;
+        margin: 0;
+        line-height: 1;
+        text-align: center;
+      }
+    }
+
 </style>
 </link></head>
 <body class="page-home">
@@ -1819,8 +1861,8 @@
         I'm a student studying <strong>cognitive science at UC Berkeley</strong>, with a strong interest in how people experience the world around them. I teach the <strong>photography principles decal</strong> (class) where I get to share both the technical skills and the ways photography can be used to connect people together.
       </p>
 <div class="about-buttons">
-<button class="btn-photo" onclick="showPage('photography')">photography</button>
-<button class="btn-contact" onclick="showPage('contact')">contact</button>
+<button class="btn-photo" onclick="showPage('photography')"><span class="btn-label">photography</span></button>
+<button class="btn-contact" onclick="showPage('contact')"><span class="btn-label">contact</span></button>
 </div>
 </div></div>
 
