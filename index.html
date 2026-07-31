@@ -1564,6 +1564,140 @@
       .about-me-wrap { width: clamp(70px, 22vw, 84px); }
     }
 
+
+
+    /* ══ RESPONSIVE REFINEMENT — desktop, tablet, and phone ══ */
+    /* Fluid desktop / smaller-laptop range: preserve the full-size composition
+       while scaling fixed artwork and form widths before the tablet breakpoint. */
+    @media (min-width: 901px) and (max-width: 1180px) {
+      .home-body {
+        grid-template-columns: minmax(0, 1.7fr) minmax(330px, 0.95fr);
+        height: calc(100vh - 48px);
+        min-height: 620px;
+      }
+      .home-photo,
+      .home-text {
+        height: min(656px, calc(100vh - 112px));
+      }
+      .home-text-group {
+        transform: scale(0.82);
+        transform-origin: center;
+      }
+
+      .about-panels {
+        --about-width: clamp(132px, 13.7vw, 162px);
+        --heading-gap: clamp(18px, 2.2vw, 26px);
+      }
+      .about-heading { gap: var(--heading-gap); }
+      .about-italic { font-size: clamp(76px, 8.45vw, 100px); }
+      .about-me-wrap {
+        width: clamp(88px, 9.4vw, 111px);
+        height: clamp(64px, 6.86vw, 81px);
+        flex-basis: clamp(88px, 9.4vw, 111px);
+      }
+      .about-copy-stack {
+        width: min(482px, calc(100% - 52px));
+        max-width: calc(100% - 52px);
+      }
+      .about-text { font-size: clamp(16px, 1.61vw, 19px); }
+
+      .contact-left { padding: clamp(36px, 4.75vw, 56px) clamp(38px, 6.1vw, 72px); }
+      .contact-italic { font-size: clamp(76px, 8.45vw, 100px); }
+      .together-wrap {
+        width: clamp(330px, 35.5vw, 419px);
+        height: auto;
+        aspect-ratio: 419 / 84;
+        margin-left: clamp(105px, 15.25vw, 180px);
+      }
+      .contact-fields { --form-width: min(599px, 100%); }
+      .contact-info { gap: clamp(20px, 3vw, 36px); }
+
+      .photo-tabs { gap: clamp(22px, 3vw, 36px); }
+      .photo-tab { font-size: clamp(22px, 2.37vw, 28px); }
+    }
+
+    /* Tablet refinement: keep layouts spacious and proportional rather than
+       inheriting phone-sized typography immediately at 900px. */
+    @media (min-width: 641px) and (max-width: 900px) {
+      #home .home-photo { flex: 1.45 1 0; }
+      #home .home-text { flex: 0.9 1 0; }
+      #home .home-text-group { transform: scale(0.76); }
+
+      .about-photo { height: clamp(390px, 52vh, 520px); }
+      .about-panels { padding: 42px clamp(36px, 7vw, 64px) 56px; }
+      .about-italic { font-size: clamp(62px, 9vw, 78px); }
+      .about-me-wrap { width: clamp(72px, 10vw, 92px); height: auto; flex-basis: auto; }
+      .about-copy-stack { max-width: 680px; }
+
+      #contact .contact-left { padding: 44px clamp(34px, 7vw, 64px); }
+      #contact .contact-heading,
+      #contact .contact-info,
+      #contact form { width: min(100%, 680px); margin-left: auto; margin-right: auto; }
+      #contact .contact-right { flex-basis: clamp(400px, 52vh, 540px); }
+    }
+
+    @media (max-width: 640px) {
+      /* ABOUT: return the seam to the visual midpoint between the two buttons.
+         “about” remains aligned with the body copy; both words use the same
+         12px breathing room on opposite sides of the seam. */
+      .about-panels {
+        --mobile-seam: 37.5%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+      }
+      .about-italic {
+        padding-left: 24px;
+        padding-right: 12px;
+        text-align: left;
+        font-size: clamp(54px, 15.2vw, 66px);
+      }
+      .about-me-wrap {
+        margin-left: 12px;
+        width: clamp(76px, 22vw, 92px);
+      }
+
+      /* PHOTOGRAPHY FOOTER: size the actual visual rows, then center their
+         combined height inside the rectangle. Transforms no longer leave an
+         invisible oversized layout box above or below the artwork. */
+      .photo-footer {
+        height: clamp(150px, 38vw, 168px);
+        min-height: 150px;
+      }
+      .photo-footer-inner {
+        height: 100%;
+        display: grid;
+        grid-template-rows: 53px 24px;
+        align-content: center;
+        justify-items: center;
+        row-gap: 4px;
+        padding: 0;
+      }
+      .photo-footer-title {
+        width: max-content;
+        height: 53px;
+        transform: scale(0.78);
+        transform-origin: center center;
+        margin: 0;
+      }
+      .photo-footer-socials {
+        height: 24px;
+        position: static;
+        top: auto;
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .photo-footer-inner { grid-template-rows: 42px 24px; }
+      .photo-footer-title {
+        height: 42px;
+        transform: scale(0.62);
+      }
+    }
 </style>
 </link></head>
 <body class="page-home">
