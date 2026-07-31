@@ -291,6 +291,7 @@
     .btn-photo { width: calc(var(--blue-seam) - var(--content-left) - 12px); min-width: 163px; }
     .btn-contact { width: 94px; }
     .btn-photo:hover, .btn-contact:hover { opacity: 0.85; }
+    .btn-photo span, .btn-contact span { margin-right: -2px; }
 
     .nav-divider { display: none; }
     body.page-home .nav-divider,
@@ -304,14 +305,14 @@
         height: auto;
         min-height: calc(100vh - 47px);
         overflow: visible;
-        background: linear-gradient(to right, #012341 0 33.333%, #003557 33.333% 100%);
+        background: #FDFDF6;
       }
       .about-photo { width: 100%; height: 54vh; min-height: 360px; }
       .about-panels {
         width: 100%;
-        min-height: 500px;
         display: block;
-        padding: 38px 32px 48px;
+        padding: 38px 32px 16px;
+        background: linear-gradient(to right, #012341 0 33.333%, #003557 33.333% 100%);
       }
       .about-dark, .about-content { display: none; }
       .about-layout-stack { display: block; transform: none; }
@@ -1226,7 +1227,7 @@
     /* ── ABOUT ── */
     @media (max-width: 480px) {
       .about-photo { height: 50vh; min-height: 320px; }
-      .about-panels { padding: 28px 26px 36px; min-height: 460px; }
+      .about-panels { padding: 28px 26px 15px; }
       .about-heading { gap: 10px; }
       .about-italic { font-size: 44px; }
       .about-me-wrap { width: 50px; height: 37px; flex-basis: 50px; }
@@ -1624,7 +1625,7 @@
       #home .home-text-group { transform: scale(0.76); }
 
       .about-photo { height: clamp(390px, 52vh, 520px); }
-      .about-panels { padding: 42px clamp(36px, 7vw, 64px) 56px; }
+      .about-panels { padding: 42px clamp(36px, 7vw, 64px) 16px; }
       .about-italic { font-size: clamp(62px, 9vw, 78px); }
       .about-me-wrap { width: clamp(72px, 10vw, 92px); height: auto; flex-basis: auto; }
       .about-copy-stack { max-width: 680px; }
@@ -1781,8 +1782,8 @@
         I'm a student studying <strong>cognitive science at UC Berkeley</strong>, with a strong interest in how people experience the world around them. I teach the <strong>photography principles decal</strong> (class) where I get to share both the technical skills and the ways photography can be used to connect people together.
       </p>
 <div class="about-buttons">
-<button class="btn-photo" onclick="showPage('photography')">photography</button>
-<button class="btn-contact" onclick="showPage('contact')">contact</button>
+<button class="btn-photo" onclick="showPage('photography')"><span>photography</span></button>
+<button class="btn-contact" onclick="showPage('contact')"><span>contact</span></button>
 </div>
 </div></div>
 
