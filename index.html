@@ -1849,6 +1849,46 @@
       }
     }
 
+
+
+    /* ══ SCREENSHOT-VERIFIED PHONE ALIGNMENT ══ */
+    @media (max-width: 640px) {
+      /* The seam is the exact midpoint of the visible gap between the
+         Photography and Contact buttons. 29% matches the real phone layout,
+         rather than centering against an invisible full-width grid track. */
+      .about-panels {
+        --mobile-seam: 29%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+      }
+
+      .about-buttons {
+        grid-template-columns:
+          calc(var(--mobile-seam) - var(--mobile-copy-left) - (var(--mobile-button-gap) / 2))
+          94px;
+      }
+
+      /* Optical centering: the SVG lettering has more transparent space below
+         its layout box than above, so shift the complete text+icons unit down
+         together while preserving the requested 8px (original + 4px) row gap. */
+      .photo-footer-inner {
+        row-gap: 8px;
+        transform: translateY(9px);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .photo-footer-inner {
+        row-gap: 8px;
+        transform: translateY(8px);
+      }
+    }
+
 </style>
 </link></head>
 <body class="page-home">
