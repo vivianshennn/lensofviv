@@ -1414,6 +1414,104 @@
       #contact .contact-info { margin-bottom: 7px; }
       #contact .contact-info-block p { font-size: 10px; letter-spacing: 1.3px; }
     }
+
+
+    /* ══ REQUESTED PHONE REFINEMENTS — v2 ══ */
+    @media (max-width: 640px) {
+      /* HOME: center the visible, scaled artwork itself—not its original 338×221 box. */
+      #home .home-text { position: relative; }
+      #home .home-text-group {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%) scale(0.56);
+        transform-origin: center center;
+      }
+
+      /* ABOUT: restore the original one-third seam and keep each word on its own blue. */
+      .about-panels {
+        --mobile-seam: 33.333%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+        min-height: 82px;
+      }
+      .about-italic {
+        width: 100%;
+        padding: 0 8px 0 4px;
+        font-size: clamp(54px, 15vw, 64px);
+        line-height: 0.9;
+        text-align: right;
+        white-space: nowrap;
+        transform: translateY(7px);
+      }
+      .about-me-wrap {
+        width: clamp(74px, 22vw, 92px);
+        height: auto;
+        flex-basis: auto;
+        margin-left: 12px;
+        transform: translateY(2px);
+      }
+
+      /* PHOTOGRAPHY: pull the icons four pixels closer while centering the group. */
+      .photo-footer-inner { gap: 16px; }
+      .photo-footer-socials { top: -8px; }
+
+      /* CONTACT: allow scrolling and show substantially more of the photograph. */
+      body.page-contact { overflow-y: auto; }
+      #contact {
+        height: auto;
+        min-height: 100dvh;
+        overflow: visible;
+      }
+      #contact .contact-body {
+        height: auto;
+        min-height: calc(100dvh - 74px);
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+      }
+      #contact .contact-left {
+        flex: 0 0 auto;
+        overflow: visible;
+        padding-top: clamp(24px, 4vh, 34px);
+        padding-bottom: clamp(24px, 4vh, 34px);
+      }
+      #contact .contact-heading { width: min(100%, 390px); }
+      #contact .together-wrap {
+        width: min(76vw, 295px);
+        margin-left: auto;
+        margin-right: 0;
+      }
+      #contact .contact-right {
+        flex: 0 0 max(52vh, 430px);
+        width: 100%;
+        height: max(52vh, 430px);
+        min-height: 430px;
+      }
+      #contact .contact-right img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+
+    @media (max-width: 380px), (max-height: 700px) and (max-width: 640px) {
+      #home .home-text-group {
+        transform: translate(-50%, -50%) scale(0.49);
+      }
+      .about-italic { font-size: clamp(48px, 14vw, 56px); }
+      .about-me-wrap { width: clamp(66px, 21vw, 80px); }
+      #contact .contact-right {
+        flex-basis: max(58vh, 420px);
+        height: max(58vh, 420px);
+      }
+    }
 </style>
 </link></head>
 <body class="page-home">
