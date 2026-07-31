@@ -1698,6 +1698,54 @@
         transform: scale(0.62);
       }
     }
+
+
+    /* ══ MOBILE ABOUT ALIGNMENT — requested responsive seam fix ══ */
+    @media (max-width: 640px) {
+      /* Keep one shared seam value for the background, heading, and buttons. */
+      .about-panels {
+        --mobile-seam: 37.5%;
+        --mobile-content-left: 32px;
+        --mobile-button-gap: 14px;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+
+      /* Shift the phone heading artwork 8px to the right. */
+      .about-italic {
+        padding-left: 32px;
+      }
+      .about-me-wrap {
+        margin-left: 20px;
+      }
+
+      /* Shift all body copy and the button row 8px to the right. */
+      .about-copy-stack {
+        padding-left: var(--mobile-content-left);
+        padding-right: 24px;
+      }
+
+      /* The seam is mathematically centered in the gap between the buttons,
+         so it remains correct at every phone viewport width. */
+      .about-buttons {
+        display: grid;
+        grid-template-columns:
+          minmax(0, calc(var(--mobile-seam) - var(--mobile-content-left) - (var(--mobile-button-gap) / 2)))
+          minmax(0, 94px);
+        gap: var(--mobile-button-gap);
+        width: 100%;
+        margin-left: 0;
+        flex-wrap: nowrap;
+      }
+
+      .about-buttons .btn-photo,
+      .about-buttons .btn-contact {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
 </style>
 </link></head>
 <body class="page-home">
