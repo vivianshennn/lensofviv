@@ -1512,6 +1512,58 @@
         height: max(58vh, 420px);
       }
     }
+
+
+    /* ══ PHONE PRECISION FIXES — v3 ══ */
+    @media (max-width: 640px) {
+      /* HOME: the original group box contains 44px of unused space below the artwork.
+         Use the true visible-art height so top and bottom gaps match. */
+      #home .home-text-group {
+        width: 338px;
+        height: 177px;
+      }
+
+      /* ABOUT: align “about” with the body copy and give both words equal seam spacing. */
+      .about-panels {
+        --mobile-seam: 44%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+      }
+      .about-italic {
+        padding: 0 12px 0 24px;
+        text-align: left;
+        font-size: clamp(58px, 16vw, 68px);
+        line-height: 0.9;
+      }
+      .about-me-wrap {
+        margin-left: 12px;
+        width: clamp(80px, 23vw, 96px);
+      }
+
+      /* PHOTOGRAPHY: center the complete title/icon unit, with no positional nudge. */
+      .photo-footer-inner {
+        justify-content: center;
+        gap: 8px;
+        padding: 0;
+      }
+      .photo-footer-title,
+      .photo-footer-socials {
+        position: static;
+        top: auto;
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 380px), (max-height: 700px) and (max-width: 640px) {
+      #home .home-text-group { height: 177px; }
+      .about-italic { font-size: clamp(52px, 15vw, 60px); }
+      .about-me-wrap { width: clamp(70px, 22vw, 84px); }
+    }
+
 </style>
 </link></head>
 <body class="page-home">
@@ -2021,6 +2073,7 @@
       document.body.classList.add('cat-' + cat);
     }
     if (name === 'home' && previousPage !== 'home') {
+      requestedHomeIndex = 0;
       setHomeImg(0);
     }
     window.scrollTo(0,0);
@@ -2029,20 +2082,25 @@
   // Home image cycling
   const homeImgs = ['IMG_4595.jpg','untitled-1572.jpg','untitled-1668.jpg','untitled-1710.jpg'];
   let curImg = 0;
-
+  let requestedHomeIndex = 0;
   let activeHomeLayer = 0;
   let homeTransitioning = false;
 
-  function setHomeImg(i) {
-    const nextIndex = (i + homeImgs.length) % homeImgs.length;
-    if (nextIndex === curImg || homeTransitioning) return;
+  function normalizeHomeIndex(i) {
+    return (i + homeImgs.length) % homeImgs.length;
+  }
 
+  function processHomeImageQueue() {
+    if (homeTransitioning || requestedHomeIndex === curImg) return;
+
+    const nextIndex = requestedHomeIndex;
     const slides = [document.getElementById('home-img-a'), document.getElementById('home-img-b')];
     const currentSlide = slides[activeHomeLayer];
     const nextLayer = activeHomeLayer === 0 ? 1 : 0;
     const nextSlide = slides[nextLayer];
 
     homeTransitioning = true;
+    nextSlide.onload = null;
     nextSlide.src = homeImgs[nextIndex];
     nextSlide.alt = 'Vivian portfolio photo ' + (nextIndex + 1);
 
@@ -2051,22 +2109,44 @@
       currentSlide.classList.remove('active');
       curImg = nextIndex;
       activeHomeLayer = nextLayer;
-      document.querySelectorAll('.home-dot').forEach((d,idx) => d.classList.toggle('active', idx===curImg));
-      window.setTimeout(() => { homeTransitioning = false; }, 700);
+      document.querySelectorAll('.home-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === curImg);
+      });
+
+      window.setTimeout(() => {
+        homeTransitioning = false;
+        processHomeImageQueue();
+      }, 700);
       startHomeInterval();
     };
 
-    if (nextSlide.complete) requestAnimationFrame(() => requestAnimationFrame(reveal));
-    else nextSlide.onload = () => requestAnimationFrame(() => requestAnimationFrame(reveal));
+    if (nextSlide.complete && nextSlide.naturalWidth) {
+      requestAnimationFrame(() => requestAnimationFrame(reveal));
+    } else {
+      nextSlide.onload = () => requestAnimationFrame(() => requestAnimationFrame(reveal));
+    }
   }
-  function nextImg() { setHomeImg(curImg + 1); }
-  function prevImg() { setHomeImg(curImg - 1); }
+
+  function setHomeImg(i) {
+    requestedHomeIndex = normalizeHomeIndex(i);
+    processHomeImageQueue();
+  }
+
+  function nextImg() {
+    requestedHomeIndex = normalizeHomeIndex(requestedHomeIndex + 1);
+    processHomeImageQueue();
+  }
+
+  function prevImg() {
+    requestedHomeIndex = normalizeHomeIndex(requestedHomeIndex - 1);
+    processHomeImageQueue();
+  }
 
   // Auto-cycle (restartable so manual navigation resets the countdown)
   let homeInterval;
   function startHomeInterval() {
     clearInterval(homeInterval);
-    homeInterval = setInterval(() => setHomeImg(curImg + 1), 4500);
+    homeInterval = setInterval(() => nextImg(), 4500);
   }
   startHomeInterval();
 
