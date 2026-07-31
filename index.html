@@ -1700,49 +1700,39 @@
     }
 
 
-    /* ══ MOBILE ABOUT ALIGNMENT — requested responsive seam fix ══ */
+    /* ══ MOBILE ABOUT ALIGNMENT — exact responsive seam ══ */
     @media (max-width: 640px) {
-      /* Keep one shared seam value for the background, heading, and buttons. */
+      /* The seam is supplied in pixels by the measurement script below. */
       .about-panels {
         --mobile-seam: 37.5%;
-        --mobile-content-left: 32px;
-        --mobile-button-gap: 14px;
         background: linear-gradient(to right,
           #012341 0 var(--mobile-seam),
           #003557 var(--mobile-seam) 100%);
       }
 
-      /* Shift the phone heading artwork 8px to the right. */
-      .about-italic {
-        padding-left: 32px;
-      }
-      .about-me-wrap {
-        margin-left: 20px;
+      /* Keep the grid boundary on the exact same measured seam. */
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
       }
 
-      /* Shift all body copy and the button row 8px to the right. */
+      /* Move the complete title artwork 12px right without moving the seam. */
+      .about-heading > .about-italic,
+      .about-heading > .about-me-wrap {
+        position: relative;
+        left: 12px;
+      }
+
+      /* Move all body copy and both buttons 12px right as one unit. */
       .about-copy-stack {
-        padding-left: var(--mobile-content-left);
-        padding-right: 24px;
+        position: relative;
+        left: 12px;
+        width: calc(100% - 12px);
+        max-width: calc(100% - 12px);
       }
 
-      /* The seam is mathematically centered in the gap between the buttons,
-         so it remains correct at every phone viewport width. */
+      /* Keep both buttons on one row so their midpoint is measurable. */
       .about-buttons {
-        display: grid;
-        grid-template-columns:
-          minmax(0, calc(var(--mobile-seam) - var(--mobile-content-left) - (var(--mobile-button-gap) / 2)))
-          minmax(0, 94px);
-        gap: var(--mobile-button-gap);
-        width: 100%;
-        margin-left: 0;
         flex-wrap: nowrap;
-      }
-
-      .about-buttons .btn-photo,
-      .about-buttons .btn-contact {
-        width: 100%;
-        min-width: 0;
       }
     }
 
@@ -2419,5 +2409,56 @@
     } catch(err) { alert('Something went wrong. Please email vivian.shen@berkeley.edu directly!'); }
   }
 </script>
+
+<script>
+  /* Place the blue seam at the exact midpoint of the visible gap between
+     the Photography and Contact buttons on every phone width. */
+  (() => {
+    const MOBILE_MAX = 640;
+
+    function setExactAboutSeam() {
+      const panel = document.querySelector('.about-panels');
+      const photo = document.querySelector('.about-buttons .btn-photo');
+      const contact = document.querySelector('.about-buttons .btn-contact');
+      if (!panel || !photo || !contact || window.innerWidth > MOBILE_MAX) return;
+
+      const panelRect = panel.getBoundingClientRect();
+      const photoRect = photo.getBoundingClientRect();
+      const contactRect = contact.getBoundingClientRect();
+      if (!panelRect.width || !photoRect.width || !contactRect.width) return;
+
+      const gapMidpoint = (photoRect.right + contactRect.left) / 2;
+      const seamFromPanelLeft = gapMidpoint - panelRect.left;
+      panel.style.setProperty('--mobile-seam', `${seamFromPanelLeft.toFixed(2)}px`);
+    }
+
+    function scheduleSeamMeasurement() {
+      requestAnimationFrame(() => requestAnimationFrame(setExactAboutSeam));
+    }
+
+    window.addEventListener('resize', scheduleSeamMeasurement, { passive: true });
+    window.addEventListener('orientationchange', scheduleSeamMeasurement, { passive: true });
+    window.addEventListener('load', scheduleSeamMeasurement);
+    document.addEventListener('DOMContentLoaded', scheduleSeamMeasurement);
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleSeamMeasurement);
+    }
+
+    const about = document.getElementById('about');
+    if (about) {
+      new MutationObserver(scheduleSeamMeasurement).observe(about, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+
+    const buttons = document.querySelector('.about-buttons');
+    if (buttons && 'ResizeObserver' in window) {
+      new ResizeObserver(scheduleSeamMeasurement).observe(buttons);
+    }
+  })();
+</script>
+
 </body>
 </html>
