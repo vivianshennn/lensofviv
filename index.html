@@ -1289,6 +1289,131 @@
       .photo-hero { margin-top: 0; }
     }
 
+
+
+    /* ══ FINAL MOBILE POLISH ══ */
+    .home-photo img.home-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: scale(1.012);
+      transition: opacity 0.7s ease-in-out, transform 1.15s ease-out;
+      will-change: opacity, transform;
+      pointer-events: none;
+    }
+    .home-photo img.home-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
+    }
+    .photo-prev, .photo-next, .home-dots { z-index: 12; }
+
+    body.page-photography,
+    body.page-photography #photography,
+    body.page-photography .photo-footer { margin-bottom: 0; padding-bottom: 0; }
+    body.page-photography #photography { min-height: 0; }
+
+    @media (max-width: 640px) {
+      html, body { width: 100%; }
+      body.page-home,
+      body.page-contact { overflow: hidden; }
+
+      /* Landing page: preserve the photo area and shorten only the green panel. */
+      #home { height: 100dvh; min-height: 100dvh; overflow: hidden; }
+      #home .home-body { height: calc(100dvh - 75px); flex: none; }
+      #home .home-photo { flex: 0 0 64%; height: 64%; }
+      #home .home-text {
+        flex: 0 0 36%;
+        height: 36%;
+        padding: 0 18px;
+        align-items: center;
+        justify-content: center;
+      }
+      #home .home-text-group {
+        transform: scale(0.56);
+        transform-origin: center center;
+        flex: 0 0 auto;
+      }
+      #home .home-dots { bottom: 12px; }
+
+      /* About heading keeps the desktop two-panel treatment on phones. */
+      .about-panels {
+        --mobile-seam: 42%;
+        padding-left: 0;
+        padding-right: 0;
+        background: linear-gradient(to right, #012341 0 var(--mobile-seam), #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        display: grid;
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+        gap: 0;
+        width: 100%;
+        align-items: center;
+      }
+      .about-italic {
+        width: 100%;
+        padding-left: 18px;
+        transform: translateY(8px);
+      }
+      .about-me-wrap {
+        margin-left: 14px;
+        transform: translateY(2px);
+      }
+      .about-copy-stack { padding-left: 24px; padding-right: 24px; max-width: 100%; }
+
+      /* Contact page: one viewport, equal outer breathing room, no bottom gap. */
+      #contact {
+        height: 100dvh;
+        min-height: 100dvh;
+        overflow: hidden;
+      }
+      #contact .contact-body {
+        height: calc(100dvh - 74px);
+        min-height: 0;
+        display: grid;
+        grid-template-rows: minmax(0, 66%) minmax(0, 34%);
+      }
+      #contact .contact-left {
+        min-height: 0;
+        padding: clamp(14px, 3.4vh, 26px) 18px;
+        justify-content: center;
+        overflow: hidden;
+      }
+      #contact .contact-heading {
+        width: min(100%, 390px);
+        margin: 0 auto clamp(10px, 1.7vh, 18px);
+        align-items: flex-start;
+      }
+      #contact .contact-italic { font-size: clamp(42px, 12vw, 58px); }
+      #contact .together-wrap {
+        width: min(76vw, 295px);
+        height: auto;
+        aspect-ratio: 419 / 84;
+        margin-left: clamp(42px, 15vw, 76px);
+        margin-top: -6px;
+      }
+      #contact .contact-info,
+      #contact form {
+        width: min(100%, 390px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #contact .contact-info { margin-bottom: clamp(8px, 1.4vh, 14px); }
+      #contact .contact-fields { gap: clamp(6px, 1vh, 9px); }
+      #contact .field-input { height: clamp(32px, 4.6vh, 38px); }
+      #contact textarea.field-input { height: clamp(58px, 8.5vh, 78px); padding-top: 9px; }
+      #contact .submit-btn { height: clamp(32px, 4.6vh, 38px); margin-top: 0; }
+      #contact .contact-right { width: 100%; min-height: 0; height: 100%; flex-basis: auto; }
+      #contact .contact-right img { height: 100%; object-position: center center; }
+    }
+
+    @media (max-width: 380px), (max-height: 700px) and (max-width: 640px) {
+      #home .home-text-group { transform: scale(0.49); }
+      #contact .contact-left { padding-top: 10px; padding-bottom: 10px; }
+      #contact .contact-heading { margin-bottom: 7px; }
+      #contact .contact-info { margin-bottom: 7px; }
+      #contact .contact-info-block p { font-size: 10px; letter-spacing: 1.3px; }
+    }
 </style>
 </link></head>
 <body class="page-home">
@@ -1309,7 +1434,8 @@
 <div class="home-photo">
 <div class="photo-prev" onclick="prevImg()"></div>
 <div class="photo-next" onclick="nextImg()"></div>
-<img alt="Vivian at Baker Beach" id="home-img" src="IMG_4595.jpg"/>
+<img alt="Vivian at Baker Beach" class="home-slide active" id="home-img-a" src="IMG_4595.jpg"/>
+<img alt="Vivian portfolio slideshow" class="home-slide" id="home-img-b" src="untitled-1572.jpg"/>
 <div class="home-dots">
 <button class="home-dot active" onclick="setHomeImg(0)"></button>
 <button class="home-dot" onclick="setHomeImg(1)"></button>
@@ -1806,13 +1932,34 @@
   const homeImgs = ['IMG_4595.jpg','untitled-1572.jpg','untitled-1668.jpg','untitled-1710.jpg'];
   let curImg = 0;
 
+  let activeHomeLayer = 0;
+  let homeTransitioning = false;
+
   function setHomeImg(i) {
-    curImg = (i + homeImgs.length) % homeImgs.length;
-    const img = document.getElementById('home-img');
-    img.style.opacity = 0;
-    setTimeout(() => { img.src = homeImgs[curImg]; img.style.opacity = 1; }, 300);
-    document.querySelectorAll('.home-dot').forEach((d,idx) => d.classList.toggle('active', idx===curImg));
-    startHomeInterval();
+    const nextIndex = (i + homeImgs.length) % homeImgs.length;
+    if (nextIndex === curImg || homeTransitioning) return;
+
+    const slides = [document.getElementById('home-img-a'), document.getElementById('home-img-b')];
+    const currentSlide = slides[activeHomeLayer];
+    const nextLayer = activeHomeLayer === 0 ? 1 : 0;
+    const nextSlide = slides[nextLayer];
+
+    homeTransitioning = true;
+    nextSlide.src = homeImgs[nextIndex];
+    nextSlide.alt = 'Vivian portfolio photo ' + (nextIndex + 1);
+
+    const reveal = () => {
+      nextSlide.classList.add('active');
+      currentSlide.classList.remove('active');
+      curImg = nextIndex;
+      activeHomeLayer = nextLayer;
+      document.querySelectorAll('.home-dot').forEach((d,idx) => d.classList.toggle('active', idx===curImg));
+      window.setTimeout(() => { homeTransitioning = false; }, 700);
+      startHomeInterval();
+    };
+
+    if (nextSlide.complete) requestAnimationFrame(() => requestAnimationFrame(reveal));
+    else nextSlide.onload = () => requestAnimationFrame(() => requestAnimationFrame(reveal));
   }
   function nextImg() { setHomeImg(curImg + 1); }
   function prevImg() { setHomeImg(curImg - 1); }
@@ -1824,6 +1971,24 @@
     homeInterval = setInterval(() => setHomeImg(curImg + 1), 4500);
   }
   startHomeInterval();
+
+  // Touch swipe navigation on the home slideshow
+  const homePhoto = document.querySelector('.home-photo');
+  let touchStartX = 0;
+  let touchStartY = 0;
+  homePhoto.addEventListener('touchstart', (e) => {
+    const touch = e.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+  homePhoto.addEventListener('touchend', (e) => {
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+      dx < 0 ? nextImg() : prevImg();
+    }
+  }, { passive: true });
 
   // Arrow key navigation
   document.addEventListener('keydown', e => {
