@@ -1790,6 +1790,51 @@
       }
     }
 
+
+    /* ══ FINAL PHONE ABOUT TUNING — equal measured gaps + balanced copy ══ */
+    @media (max-width: 640px) {
+      .about-panels {
+        /* The complete composition remains vertically centered. */
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        padding-top: 36px !important;
+        padding-bottom: 36px !important;
+      }
+
+      .about-layout-stack {
+        width: 100%;
+        flex: 0 0 auto;
+      }
+
+      /* Keep the prior 12px rightward move while preserving equal visual
+         text margins: the translated box ends 12px from each panel edge,
+         and its equal 24px inner padding produces equal 36px text margins. */
+      .about-copy-stack {
+        left: 0 !important;
+        transform: translateX(12px);
+        width: calc(100% - 24px) !important;
+        max-width: calc(100% - 24px) !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        margin-top: var(--measured-about-copy-gap, 36px) !important;
+      }
+
+      .about-text {
+        width: 100%;
+        max-width: 100%;
+        text-wrap: pretty;
+        overflow-wrap: normal;
+        word-break: normal;
+        hyphens: none;
+      }
+
+      /* The second paragraph-to-buttons gap is the fixed comparison gap. */
+      .about-buttons {
+        margin-top: 36px !important;
+      }
+    }
+
 </style>
 </link></head>
 <body class="page-home">
@@ -1867,10 +1912,10 @@
 </svg></div>
 </div><div class="about-copy-stack">
 <p class="about-text">
-        I first fell <strong>in love</strong> with photography by noticing the <strong>beauty of nature and landscapes</strong>, capturing the light and details often overlooked. Over the past year, I explored more of <strong>portrait and studio photography</strong> and developed a deeper interest in <strong>capturing peoples' personalities</strong> and the <strong>memories</strong> that matter to them.
+        I first fell <strong>in love</strong> with photography by noticing the <strong>beauty of nature and landscapes</strong>, capturing the light and details often overlooked. Over the past year, I explored more of <strong>portrait and studio photography</strong> and developed a deeper interest in <strong>capturing peoples' personalities</strong> and the <strong>memories</strong> that matter to&nbsp;them.
       </p>
 <p class="about-text">
-        I'm a student studying <strong>cognitive science at UC Berkeley</strong>, with a strong interest in how people experience the world around them. I teach the <strong>photography principles decal</strong> (class) where I get to share both the technical skills and the ways photography can be used to connect people together.
+        I'm a student studying <strong>cognitive science at UC Berkeley</strong>, with a strong interest in how people experience the world around them. I teach the <strong>photography principles decal</strong> (class) where I get to share both the technical skills and the ways photography can be used to connect people&nbsp;together.
       </p>
 <div class="about-buttons">
 <button class="btn-photo" onclick="showPage('photography')"><span class="btn-label">photography</span></button>
@@ -2510,6 +2555,73 @@
     const buttons = document.querySelector('.about-buttons');
     if (buttons && 'ResizeObserver' in window) {
       new ResizeObserver(scheduleSeamMeasurement).observe(buttons);
+    }
+  })();
+</script>
+
+<script>
+  /* Match the visible ABOUT element-to-paragraph box gap to the exact
+     36px paragraph-to-buttons gap after fonts and responsive wrapping settle. */
+  (() => {
+    const MOBILE_MAX = 640;
+    let frame = 0;
+
+    function equalizeAboutGaps() {
+      if (window.innerWidth > MOBILE_MAX) return;
+
+      const panel = document.querySelector('.about-panels');
+      const aboutWord = document.querySelector('.about-italic');
+      const firstParagraph = document.querySelector('.about-copy-stack > .about-text:first-of-type');
+      const secondParagraph = document.querySelector('.about-copy-stack > .about-text:nth-of-type(2)');
+      const buttons = document.querySelector('.about-buttons');
+      if (!panel || !aboutWord || !firstParagraph || !secondParagraph || !buttons) return;
+
+      /* Reset to the requested value before measuring, then compensate for
+         any difference caused by the heading's actual rendered box. */
+      panel.style.setProperty('--measured-about-copy-gap', '36px');
+
+      requestAnimationFrame(() => {
+        const aboutRect = aboutWord.getBoundingClientRect();
+        const firstRect = firstParagraph.getBoundingClientRect();
+        const currentGap = firstRect.top - aboutRect.bottom;
+        const correctedMargin = 36 + (36 - currentGap);
+        panel.style.setProperty('--measured-about-copy-gap', `${correctedMargin.toFixed(2)}px`);
+
+        /* Expose the final code-measured values for easy verification in DevTools. */
+        requestAnimationFrame(() => {
+          const a = aboutWord.getBoundingClientRect();
+          const p1 = firstParagraph.getBoundingClientRect();
+          const p2 = secondParagraph.getBoundingClientRect();
+          const b = buttons.getBoundingClientRect();
+          panel.dataset.aboutToParagraphGap = (p1.top - a.bottom).toFixed(2);
+          panel.dataset.paragraphToButtonsGap = (b.top - p2.bottom).toFixed(2);
+        });
+      });
+    }
+
+    function scheduleEqualization() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => requestAnimationFrame(equalizeAboutGaps));
+    }
+
+    window.addEventListener('resize', scheduleEqualization, { passive: true });
+    window.addEventListener('orientationchange', scheduleEqualization, { passive: true });
+    window.addEventListener('load', scheduleEqualization);
+    document.addEventListener('DOMContentLoaded', scheduleEqualization);
+
+    if (document.fonts?.ready) document.fonts.ready.then(scheduleEqualization);
+
+    const aboutPage = document.getElementById('about');
+    if (aboutPage) {
+      new MutationObserver(scheduleEqualization).observe(aboutPage, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+
+    const panel = document.querySelector('.about-panels');
+    if (panel && 'ResizeObserver' in window) {
+      new ResizeObserver(scheduleEqualization).observe(panel);
     }
   })();
 </script>
