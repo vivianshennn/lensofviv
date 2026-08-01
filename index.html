@@ -1790,17 +1790,17 @@
 }
 
 
-/* PHONE ONLY: requested final tweaks */
+/* PHONE ONLY: move About paragraphs up and visually center Photography label */
 @media (max-width: 640px) {
-  /* Move only the ME artwork 4px left */
-  #about .about-me-wrap {
-    margin-left: calc(12px - 4px) !important;
-  }
-
-  /* Move only the body paragraphs up 4px */
+  /* Move only the two paragraphs; heading, buttons, and desktop stay untouched. */
   #about .about-text {
     position: relative;
-    top: -4px;
+    top: -8px;
+  }
+
+  /* Nudge only the Photography text slightly right inside its existing button. */
+  #about .btn-photo .btn-label {
+    transform: translateX(2px);
   }
 }
 
