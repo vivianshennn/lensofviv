@@ -1779,44 +1779,37 @@
     }
 
 
-    /* Requested final adjustments */
-    @media (max-width: 640px) {
-      /* Move both About-page buttons down exactly 4px. */
-      .about-buttons {
-        margin-top: 40px !important;
-      }
-    }
+/* Restore desktop ABOUT spacing only */
+@media (min-width:901px){
+  .about-heading{
+    gap:30px !important;
+  }
+  .about-me-wrap{
+    margin-left:4px !important;
+  }
+}
 
-    @media (min-width: 901px) {
-      /* Preserve the original computer About heading exactly. */
-      .about-heading {
-        display: flex;
-        align-items: center;
-        gap: 26px;
-        height: 125px;
-        margin-left: var(--content-left);
-        transform: translateY(26px);
-      }
 
-      .about-italic {
-        width: var(--about-width);
-        flex: 0 0 var(--about-width);
-        padding: 0;
-        font-size: 100px;
-        line-height: 1;
-        text-align: left;
-        transform: translateY(19px);
-      }
+/* ===== Phone-only fixes ===== */
+@media (max-width:900px){
 
-      .about-me-wrap {
-        width: 111px;
-        height: 81px;
-        flex: 0 0 111px;
-        margin-left: 0;
-        position: static;
-        transform: translateY(8px);
-      }
-    }
+  /* Move ONLY the About body paragraphs up 4px */
+  #about .about-text{
+    position:relative;
+    top:-4px;
+  }
+
+  /* Visually center the Photography label without moving the button */
+  #about .btn-photo{
+    justify-content:center;
+  }
+
+  #about .btn-photo .btn-label,
+  #about .btn-photo span{
+    position:relative;
+    left:1.5px;
+  }
+}
 
 </style>
 </link></head>
