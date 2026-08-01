@@ -1356,14 +1356,10 @@
         transform: translateY(8px);
       }
       .about-me-wrap {
-        margin-left: 10px;
+        margin-left: 14px;
         transform: translateY(2px);
       }
-      .about-copy-stack { padding-left: 24px; padding-right: 24px; max-width: 100%; }
-      .about-copy-stack .about-text{
-        position:relative;
-        top:-4px;
-      }
+      .about-copy-stack { padding-left: 24px; padding-right: 24px; max-width: 100%; transform: translateY(-4px); }
 
       /* Contact page: one viewport, equal outer breathing room, no bottom gap. */
       #contact {
@@ -1812,6 +1808,30 @@
   #about .btn-photo span{
     position:relative;
     left:1.5px;
+  }
+}
+
+
+@media (max-width:640px){
+  /* Photography page nav 8px larger */
+  body.page-photography .nav-links li a{
+    font-size:20px !important;
+  }
+
+  /* Footer */
+  .photo-footer-inner{
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    gap:28px !important; /* +8px */
+  }
+  .photo-footer-title,
+  .photo-footer-socials{
+    justify-content:center !important;
+    align-items:center !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    text-align:center !important;
   }
 }
 
