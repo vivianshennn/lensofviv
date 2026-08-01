@@ -1779,10 +1779,28 @@
     }
 
 
-/* Phone only: move About body paragraphs up 8px */
-@media (max-width:640px){
-  .about-copy-stack{
-    transform: translateY(-8px) !important;
+/* Restore desktop ABOUT spacing only */
+@media (min-width:901px){
+  .about-heading{
+    gap:30px !important;
+  }
+  .about-me-wrap{
+    margin-left:4px !important;
+  }
+}
+
+
+/* PHONE ONLY: move About paragraphs up and visually center Photography label */
+@media (max-width: 640px) {
+  /* Move only the two paragraphs; heading, buttons, and desktop stay untouched. */
+  #about .about-text {
+    position: relative;
+    top: -8px;
+  }
+
+  /* Nudge only the Photography text slightly right inside its existing button. */
+  #about .btn-photo .btn-label {
+    transform: translateX(2px);
   }
 }
 
