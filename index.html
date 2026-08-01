@@ -1356,10 +1356,14 @@
         transform: translateY(8px);
       }
       .about-me-wrap {
-        margin-left: 14px;
+        margin-left: 10px;
         transform: translateY(2px);
       }
-      .about-copy-stack { padding-left: 24px; padding-right: 24px; max-width: 100%; transform: translateY(-4px); }
+      .about-copy-stack { padding-left: 24px; padding-right: 24px; max-width: 100%; }
+      .about-copy-stack .about-text{
+        position:relative;
+        top:-4px;
+      }
 
       /* Contact page: one viewport, equal outer breathing room, no bottom gap. */
       #contact {
@@ -1808,21 +1812,6 @@
   #about .btn-photo span{
     position:relative;
     left:1.5px;
-  }
-}
-
-
-
-@media (max-width:640px){
-  /* Move only the "ME" artwork 4px left */
-  .about-me-wrap{
-    margin-left:10px !important; /* was 14px */
-  }
-
-  /* Move only the two body paragraphs up 8px */
-  .about-copy-stack .about-text{
-    position:relative;
-    top:-8px;
   }
 }
 
