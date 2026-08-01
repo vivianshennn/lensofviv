@@ -1811,6 +1811,40 @@
   }
 }
 
+
+/* MOBILE ONLY: Photography tabs and footer refinements */
+@media (max-width: 640px) {
+  /* Make the Photography category navigation 8px larger */
+  #photography .photo-tab {
+    font-size: 27px !important;
+  }
+
+  /* Add 4px more space and center the whole footer group vertically */
+  #photography .photo-footer-inner {
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 24px !important;
+  }
+
+  #photography .photo-footer-title,
+  #photography .photo-footer-socials {
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  #photography .photo-footer-socials {
+    top: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Existing phone size was 16px, so this is exactly 8px larger */
+  #photography .photo-tab {
+    font-size: 24px !important;
+  }
+}
+
 </style>
 </link></head>
 <body class="page-home">
