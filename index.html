@@ -310,14 +310,11 @@
       .about-panels {
         width: 100%;
         min-height: 500px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        display: block;
         padding: 38px 32px 48px;
       }
       .about-dark, .about-content { display: none; }
-      .about-layout-stack { display: flex; flex-direction: column; align-items: center; transform: none; }
+      .about-layout-stack { display: block; transform: none; }
       .about-heading {
         height: auto;
         margin-left: 0;
@@ -333,13 +330,12 @@
       .about-me-wrap { width: 67px; height: 49px; flex-basis: 67px; }
       .about-copy-stack {
         width: auto;
-        max-width: 92%;
+        max-width: none;
         margin-left: 0;
-        margin-top: 36px;
-        text-align: left;
+        margin-top: 48px;
       }
-      .about-text { font-size: 16px; line-height: 1.3; }
-      .about-buttons { flex-wrap: wrap; margin-top: 36px; align-self: flex-start; }
+      .about-text { font-size: 18px; line-height: 1.3; }
+      .about-buttons { flex-wrap: wrap; margin-top: 48px; }
     }
 
     
@@ -376,7 +372,7 @@
     .hero-creative .photos-creative,
     .hero-graduation .photos-graduation { display: block; }
 
-    .hero-nature      { background: #7E7294; }
+    .hero-nature      { background: #786C8F; }
     .hero-portrait    { background: #30402E; }
     .hero-creative    { background: #1B192E; }
     .hero-graduation  { background: #252849; }
@@ -804,7 +800,7 @@
 
     /* Photography gallery navigation */
     .photo-gallery-nav {
-      --gallery-accent: #7E7294;
+      --gallery-accent: #786C8F;
       width: 100%;
       padding: 52px 6.25% 52px;
       background: #FDFDF6;
@@ -812,7 +808,7 @@
       transition: color 0.35s ease;
     }
 
-    .photo-gallery-nav.nav-nature { --gallery-accent: #7E7294; }
+    .photo-gallery-nav.nav-nature { --gallery-accent: #786C8F; }
     .photo-gallery-nav.nav-portrait { --gallery-accent: #30402E; }
     .photo-gallery-nav.nav-creative { --gallery-accent: #1B192E; }
     .photo-gallery-nav.nav-graduation { --gallery-accent: #252849; }
@@ -884,7 +880,7 @@
 
     /* Photography footer — based on the 1280 × 191 Figma design */
     .photo-footer {
-      --footer-bg: #7E7294;
+      --footer-bg: #786C8F;
       width: 100%;
       height: clamp(150px, 14.921875vw, 191px);
       min-height: 150px;
@@ -899,7 +895,7 @@
     }
 
     .photo-footer.footer-nature {
-      --footer-bg: #7E7294;
+      --footer-bg: #786C8F;
       --connected-outline: #D1AEA4;
       --connected-solid: #403858;
     }
@@ -1054,11 +1050,6 @@
       fill: var(--footer-bg);
     }
 
-    .photo-footer-social.linkedin {
-      border-radius: 30%;
-      overflow: hidden;
-    }
-
     @media (max-width: 700px) {
       .photo-footer {
         height: 150px;
@@ -1082,7 +1073,7 @@
     .contact-body { display: flex; flex: 1; gap: 16px; overflow: hidden; }
 
     .contact-left {
-      width: 52%; background: #809A7C;
+      width: 52%; background: #5F785B;
       display:flex;
       flex-direction:column;
       justify-content:center;
@@ -1091,7 +1082,7 @@
     .contact-heading { width:100%; margin-bottom:32px; display:flex; flex-direction:column; align-items:flex-start; }
     .contact-italic {
       font-family: 'Italianno', cursive; font-size: 100px; font-weight: 400;
-      letter-spacing: 2px; color: white; display: block; line-height: 1;
+      letter-spacing: 2px; color: #FFFFFF; display: block; line-height: 1;
     }
     .together-wrap {
       position: relative; display: inline-block;
@@ -1102,11 +1093,18 @@
     .contact-info { display:flex; gap:36px; margin-bottom:24px; align-items:flex-start; }
     .contact-info-block label {
       font-family: 'ivymode', sans-serif; font-size: 11px; letter-spacing: 2px;
-      text-transform: uppercase; color: rgba(255,255,255,0.7); display: block; margin-bottom: 4px;
+      text-transform: uppercase; color: #FFFFFF; display: block; margin-bottom: 4px;
     }
-    .contact-info-block p { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: rgba(255,255,255,0.8); }
+    .contact-info-block p {
+      font-family: 'ivymode', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: none;
+      color: #FFFFFF;
+    }
     .social-icons { display: flex; gap: 8px; margin-top: 6px; align-items: center; }
-    .social-icon { cursor: pointer; opacity: 0.8; transition: opacity 0.2s; display: flex; align-items: center; }
+    .social-icon { cursor: pointer; opacity: 1; transition: opacity 0.2s; display: flex; align-items: center; color:#FFFFFF; }
     .social-icon:hover { opacity: 1; }
     .social-icon svg { width: 16px; height: 16px; fill: white; }
     .contact-divider { width: 1px; background: rgba(255,255,255,0.8); align-self: stretch; }
@@ -1116,13 +1114,12 @@
       font-family: 'ivymode', sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 2px;
       text-transform: uppercase;
       background: transparent; border: 1px solid #FFF; border-radius: 4px;
-      color: white; height: 40px; padding: 0 14px; outline: none; width: 100%; resize: none;
+      color: #FFFFFF; height: 40px; padding: 0 14px; outline: none; width: 100%; resize: none;
       transition: border-color 0.2s;
       width: var(--form-width);
     }
-    .field-input::placeholder { color: rgba(255,255,255,0.8); font-family: 'ivymode', sans-serif; font-size: 12px; letter-spacing: 2px; }
-    .field-input[type="email"] { text-transform: none; }
-    .field-input:focus { border-color: white; }
+    .field-input::placeholder { color: #FFFFFF; font-family: 'ivymode', sans-serif; font-size: 12px; letter-spacing: 2px; }
+    .field-input:focus { border-color: #FFFFFF; }
     textarea.field-input { width: var(--form-width); height: 100px; padding: 12px 14px; }
     .submit-btn{ width: var(--form-width); }
     .submit-btn {
@@ -1132,7 +1129,7 @@
       transition: opacity 0.25s;
     }
     .submit-btn:hover { opacity: 0.85; }
-    .form-success { display: none; font-family: 'Italianno', cursive; font-size: 20px; color: white; margin-top: 8px; }
+    .form-success { display: none; font-family: 'Italianno', cursive; font-size: 20px; color: #FFFFFF; margin-top: 8px; }
 
     .contact-right { flex: 1; overflow: hidden; }
     .contact-right img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
@@ -1145,13 +1142,13 @@
     }
     .lightbox.open { display: flex; }
     .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
-    .lightbox-close { position: absolute; top: 20px; right: 28px; color: white; font-size: 28px; cursor: pointer; background: none; border: none; }
+    .lightbox-close { position: absolute; top: 20px; right: 28px; color: #FFFFFF; font-size: 28px; cursor: pointer; background: none; border: none; }
 
     /* nav logo color per page */
     body.page-home .nav-logo     { color: #17292B; }
     body.page-about .nav-logo    { color: #003557; }
     body.page-photography .nav-logo { color: #403858; }
-    body.page-photography.cat-nature .nav-logo     { color: #7E7294; }
+    body.page-photography.cat-nature .nav-logo     { color: #786C8F; }
     body.page-photography.cat-portrait .nav-logo   { color: #30402E; }
     body.page-photography.cat-creative .nav-logo   { color: #1B192E; }
     body.page-photography.cat-graduation .nav-logo { color: #252849; }
@@ -1208,25 +1205,22 @@
 
     /* ── HOME ── */
     @media (max-width: 900px) {
-      body.page-home { overflow: hidden; height: 100vh; height: 100dvh; }
-      #home { height: 100vh; height: 100dvh; padding-bottom: 0; overflow: hidden; }
+      #home { height: 100vh; padding-bottom: 0; overflow: hidden; }
       .home-body {
         display: flex; flex-direction: column; height: 100%; flex: 1; min-height: 0; gap: 0;
       }
-      .home-photo { width: 100%; height: auto; min-height: 0; flex: 1.8 1 0; }
+      .home-photo { width: 100%; height: auto; min-height: 0; flex: 1.3 1 0; }
       .home-text {
-        width: 100%; height: auto; min-height: 0; max-height: 200px; flex: 0.7 1 0; padding: 16px 24px;
+        width: 100%; height: auto; min-height: 0; flex: 1 1 0; padding: 20px 24px;
       }
-      .home-text-group { transform: scale(0.72); }
+      .home-text-group { transform: scale(0.82); }
     }
     @media (max-width: 600px) {
-      .home-photo { flex: 2 1 0; }
-      .home-text { max-height: 160px; flex: 0.55 1 0; }
-      .home-text-group { transform: scale(0.55); }
+      .home-photo { flex: 1.15 1 0; }
+      .home-text-group { transform: scale(0.62); }
     }
     @media (max-width: 380px) {
-      .home-text { max-height: 130px; }
-      .home-text-group { transform: scale(0.46); }
+      .home-text-group { transform: scale(0.52); }
     }
 
     /* ── ABOUT ── */
@@ -1239,7 +1233,7 @@
       .about-copy-stack { margin-top: 36px; max-width: 92%; }
       .about-text { font-size: 16px; }
       .about-buttons { gap: 14px; margin-top: 36px; }
-      .btn-photo, .btn-contact { font-size: 13px; padding: 4px 11px 4px 13px; height: 30px; }
+      .btn-photo, .btn-contact { font-size: 13px; padding: 4px 12px; height: 30px; }
       .btn-photo { width: auto; min-width: 0; }
     }
 
@@ -1262,33 +1256,18 @@
 
     /* ── CONTACT ── */
     @media (max-width: 900px) {
-      #contact { height: auto; min-height: auto; padding-top: 48px; padding-bottom: 0; }
+      #contact { height: auto; min-height: 100vh; padding-top: 48px; padding-bottom: 0; }
       .contact-body { flex-direction: column; overflow: visible; gap: 0; }
       .contact-left { width: 100%; padding: 32px 24px; }
       .contact-fields { --form-width: 100%; }
-      .contact-right { flex: 0 0 420px; width: 100%; overflow: hidden; }
-      .contact-right img { object-position: center 88%; }
-
-      .contact-heading { align-items: center; text-align: center; }
-      .contact-italic { font-size: clamp(42px, 11vw, 68px); }
-      .together-wrap {
-        width: min(92%, 380px);
-        height: auto;
-        aspect-ratio: 419 / 84;
-        margin-left: 0;
-        margin-top: 6px;
-      }
-      .contact-info { justify-content: center; text-align: center; gap: 32px; }
-      .contact-info-block { text-align: center; }
-      .contact-info-block label { font-size: 14px; }
-      .contact-info-block p { font-size: 20px; }
-      .social-icons { justify-content: center; }
-      .social-icon svg { width: 22px; height: 22px; }
+      .contact-right { flex: 0 0 400px; width: 100%; }
     }
     @media (max-width: 480px) {
       .contact-left { padding: 28px 18px; }
-      .contact-info { gap: 20px; row-gap: 16px; flex-wrap: wrap; }
-      .contact-right { flex-basis: 380px; }
+      .contact-italic { font-size: 44px; }
+      .together-wrap { width: 190px; height: 38px; margin-left: 60px; margin-top: -4px; }
+      .contact-info { gap: 24px; row-gap: 16px; flex-wrap: wrap; }
+      .contact-right { flex-basis: 340px; }
     }
 
     /* ── MOBILE NAV: center the logo on its own row above the links ── */
@@ -1308,6 +1287,495 @@
       #photography { padding-top: 74px; }
       #contact { padding-top: 74px; padding-bottom: 0; }
       .photo-hero { margin-top: 0; }
+    }
+
+
+
+    /* ══ FINAL MOBILE POLISH ══ */
+    .home-photo img.home-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: scale(1.012);
+      transition: opacity 0.7s ease-in-out, transform 1.15s ease-out;
+      will-change: opacity, transform;
+      pointer-events: none;
+    }
+    .home-photo img.home-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
+    }
+    .photo-prev, .photo-next, .home-dots { z-index: 12; }
+
+    body.page-photography,
+    body.page-photography #photography,
+    body.page-photography .photo-footer { margin-bottom: 0; padding-bottom: 0; }
+    body.page-photography #photography { min-height: 0; }
+
+    @media (max-width: 640px) {
+      html, body { width: 100%; }
+      body.page-home,
+      body.page-contact { overflow: hidden; }
+
+      /* Landing page: preserve the photo area and shorten only the green panel. */
+      #home { height: 100dvh; min-height: 100dvh; overflow: hidden; }
+      #home .home-body { height: calc(100dvh - 75px); flex: none; }
+      #home .home-photo { flex: 0 0 64%; height: 64%; }
+      #home .home-text {
+        flex: 0 0 36%;
+        height: 36%;
+        padding: 0 18px;
+        align-items: center;
+        justify-content: center;
+      }
+      #home .home-text-group {
+        transform: scale(0.56);
+        transform-origin: center center;
+        flex: 0 0 auto;
+      }
+      #home .home-dots { bottom: 12px; }
+
+      /* About heading keeps the desktop two-panel treatment on phones. */
+      .about-panels {
+        --mobile-seam: 42%;
+        padding-left: 0;
+        padding-right: 0;
+        background: linear-gradient(to right, #012341 0 var(--mobile-seam), #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        display: grid;
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+        gap: 0;
+        width: 100%;
+        align-items: center;
+      }
+      .about-italic {
+        width: 100%;
+        padding-left: 18px;
+        transform: translateY(8px);
+      }
+      .about-me-wrap {
+        margin-left: 14px;
+        transform: translateY(2px);
+      }
+      .about-copy-stack { padding-left: 24px; padding-right: 24px; max-width: 100%; }
+
+      /* Contact page: one viewport, equal outer breathing room, no bottom gap. */
+      #contact {
+        height: 100dvh;
+        min-height: 100dvh;
+        overflow: hidden;
+      }
+      #contact .contact-body {
+        height: calc(100dvh - 74px);
+        min-height: 0;
+        display: grid;
+        grid-template-rows: minmax(0, 66%) minmax(0, 34%);
+      }
+      #contact .contact-left {
+        min-height: 0;
+        padding: clamp(14px, 3.4vh, 26px) 18px;
+        justify-content: center;
+        overflow: hidden;
+      }
+      #contact .contact-heading {
+        width: min(100%, 390px);
+        margin: 0 auto clamp(10px, 1.7vh, 18px);
+        align-items: flex-start;
+      }
+      #contact .contact-italic { font-size: clamp(42px, 12vw, 58px); }
+      #contact .together-wrap {
+        width: min(76vw, 295px);
+        height: auto;
+        aspect-ratio: 419 / 84;
+        margin-left: clamp(42px, 15vw, 76px);
+        margin-top: -6px;
+      }
+      #contact .contact-info,
+      #contact form {
+        width: min(100%, 390px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #contact .contact-info { margin-bottom: clamp(8px, 1.4vh, 14px); }
+      #contact .contact-fields { gap: clamp(6px, 1vh, 9px); }
+      #contact .field-input { height: clamp(32px, 4.6vh, 38px); }
+      #contact textarea.field-input { height: clamp(58px, 8.5vh, 78px); padding-top: 9px; }
+      #contact .submit-btn { height: clamp(32px, 4.6vh, 38px); margin-top: 0; }
+      #contact .contact-right { width: 100%; min-height: 0; height: 100%; flex-basis: auto; }
+      #contact .contact-right img { height: 100%; object-position: center center; }
+    }
+
+    @media (max-width: 380px), (max-height: 700px) and (max-width: 640px) {
+      #home .home-text-group { transform: scale(0.49); }
+      #contact .contact-left { padding-top: 10px; padding-bottom: 10px; }
+      #contact .contact-heading { margin-bottom: 7px; }
+      #contact .contact-info { margin-bottom: 7px; }
+      #contact .contact-info-block p { font-size: 10px; letter-spacing: 1.3px; }
+    }
+
+
+    /* ══ REQUESTED PHONE REFINEMENTS — v2 ══ */
+    @media (max-width: 640px) {
+      /* HOME: center the visible, scaled artwork itself—not its original 338×221 box. */
+      #home .home-text { position: relative; }
+      #home .home-text-group {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%) scale(0.56);
+        transform-origin: center center;
+      }
+
+      /* ABOUT: restore the original one-third seam and keep each word on its own blue. */
+      .about-panels {
+        --mobile-seam: 33.333%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+        min-height: 82px;
+      }
+      .about-italic {
+        width: 100%;
+        padding: 0 8px 0 4px;
+        font-size: clamp(54px, 15vw, 64px);
+        line-height: 0.9;
+        text-align: right;
+        white-space: nowrap;
+        transform: translateY(7px);
+      }
+      .about-me-wrap {
+        width: clamp(74px, 22vw, 92px);
+        height: auto;
+        flex-basis: auto;
+        margin-left: 12px;
+        transform: translateY(2px);
+      }
+
+      /* PHOTOGRAPHY: pull the icons four pixels closer while centering the group. */
+      .photo-footer-inner { gap: 16px; }
+      .photo-footer-socials { top: -8px; }
+
+      /* CONTACT: allow scrolling and show substantially more of the photograph. */
+      body.page-contact { overflow-y: auto; }
+      #contact {
+        height: auto;
+        min-height: 100dvh;
+        overflow: visible;
+      }
+      #contact .contact-body {
+        height: auto;
+        min-height: calc(100dvh - 74px);
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+      }
+      #contact .contact-left {
+        flex: 0 0 auto;
+        overflow: visible;
+        padding-top: clamp(24px, 4vh, 34px);
+        padding-bottom: clamp(24px, 4vh, 34px);
+      }
+      #contact .contact-heading { width: min(100%, 390px); }
+      #contact .together-wrap {
+        width: min(76vw, 295px);
+        margin-left: auto;
+        margin-right: 0;
+      }
+      #contact .contact-right {
+        flex: 0 0 max(52vh, 430px);
+        width: 100%;
+        height: max(52vh, 430px);
+        min-height: 430px;
+      }
+      #contact .contact-right img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+
+    @media (max-width: 380px), (max-height: 700px) and (max-width: 640px) {
+      #home .home-text-group {
+        transform: translate(-50%, -50%) scale(0.49);
+      }
+      .about-italic { font-size: clamp(48px, 14vw, 56px); }
+      .about-me-wrap { width: clamp(66px, 21vw, 80px); }
+      #contact .contact-right {
+        flex-basis: max(58vh, 420px);
+        height: max(58vh, 420px);
+      }
+    }
+
+
+    /* ══ PHONE PRECISION FIXES — v3 ══ */
+    @media (max-width: 640px) {
+      /* HOME: the original group box contains 44px of unused space below the artwork.
+         Use the true visible-art height so top and bottom gaps match. */
+      #home .home-text-group {
+        width: 338px;
+        height: 177px;
+      }
+
+      /* ABOUT: align “about” with the body copy and give both words equal seam spacing. */
+      .about-panels {
+        --mobile-seam: 44%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+      }
+      .about-italic {
+        padding: 0 12px 0 24px;
+        text-align: left;
+        font-size: clamp(58px, 16vw, 68px);
+        line-height: 0.9;
+      }
+      .about-me-wrap {
+        margin-left: 12px;
+        width: clamp(80px, 23vw, 96px);
+      }
+
+      /* PHOTOGRAPHY: center the complete title/icon unit, with no positional nudge. */
+      .photo-footer-inner {
+        justify-content: center;
+        gap: 8px;
+        padding: 0;
+      }
+      .photo-footer-title,
+      .photo-footer-socials {
+        position: static;
+        top: auto;
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 380px), (max-height: 700px) and (max-width: 640px) {
+      #home .home-text-group { height: 177px; }
+      .about-italic { font-size: clamp(52px, 15vw, 60px); }
+      .about-me-wrap { width: clamp(70px, 22vw, 84px); }
+    }
+
+
+
+    /* ══ RESPONSIVE REFINEMENT — desktop, tablet, and phone ══ */
+    /* Fluid desktop / smaller-laptop range: preserve the full-size composition
+       while scaling fixed artwork and form widths before the tablet breakpoint. */
+    @media (min-width: 901px) and (max-width: 1180px) {
+      .home-body {
+        grid-template-columns: minmax(0, 1.7fr) minmax(330px, 0.95fr);
+        height: calc(100vh - 48px);
+        min-height: 620px;
+      }
+      .home-photo,
+      .home-text {
+        height: min(656px, calc(100vh - 112px));
+      }
+      .home-text-group {
+        transform: scale(0.82);
+        transform-origin: center;
+      }
+
+      .about-panels {
+        --about-width: clamp(132px, 13.7vw, 162px);
+        --heading-gap: clamp(18px, 2.2vw, 26px);
+      }
+      .about-heading { gap: var(--heading-gap); }
+      .about-italic { font-size: clamp(76px, 8.45vw, 100px); }
+      .about-me-wrap {
+        width: clamp(88px, 9.4vw, 111px);
+        height: clamp(64px, 6.86vw, 81px);
+        flex-basis: clamp(88px, 9.4vw, 111px);
+      }
+      .about-copy-stack {
+        width: min(482px, calc(100% - 52px));
+        max-width: calc(100% - 52px);
+      }
+      .about-text { font-size: clamp(16px, 1.61vw, 19px); }
+
+      .contact-left { padding: clamp(36px, 4.75vw, 56px) clamp(38px, 6.1vw, 72px); }
+      .contact-italic { font-size: clamp(76px, 8.45vw, 100px); }
+      .together-wrap {
+        width: clamp(330px, 35.5vw, 419px);
+        height: auto;
+        aspect-ratio: 419 / 84;
+        margin-left: clamp(105px, 15.25vw, 180px);
+      }
+      .contact-fields { --form-width: min(599px, 100%); }
+      .contact-info { gap: clamp(20px, 3vw, 36px); }
+
+      .photo-tabs { gap: clamp(22px, 3vw, 36px); }
+      .photo-tab { font-size: clamp(22px, 2.37vw, 28px); }
+    }
+
+    /* Tablet refinement: keep layouts spacious and proportional rather than
+       inheriting phone-sized typography immediately at 900px. */
+    @media (min-width: 641px) and (max-width: 900px) {
+      #home .home-photo { flex: 1.45 1 0; }
+      #home .home-text { flex: 0.9 1 0; }
+      #home .home-text-group { transform: scale(0.76); }
+
+      .about-photo { height: clamp(390px, 52vh, 520px); }
+      .about-panels { padding: 42px clamp(36px, 7vw, 64px) 56px; }
+      .about-italic { font-size: clamp(62px, 9vw, 78px); }
+      .about-me-wrap { width: clamp(72px, 10vw, 92px); height: auto; flex-basis: auto; }
+      .about-copy-stack { max-width: 680px; }
+
+      #contact .contact-left { padding: 44px clamp(34px, 7vw, 64px); }
+      #contact .contact-heading,
+      #contact .contact-info,
+      #contact form { width: min(100%, 680px); margin-left: auto; margin-right: auto; }
+      #contact .contact-right { flex-basis: clamp(400px, 52vh, 540px); }
+    }
+
+    @media (max-width: 640px) {
+      /* ABOUT: return the seam to the visual midpoint between the two buttons.
+         “about” remains aligned with the body copy; both words use the same
+         12px breathing room on opposite sides of the seam. */
+      .about-panels {
+        --mobile-seam: 37.5%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+      }
+      .about-italic {
+        padding-left: 24px;
+        padding-right: 12px;
+        text-align: left;
+        font-size: clamp(54px, 15.2vw, 66px);
+      }
+      .about-me-wrap {
+        margin-left: 12px;
+        width: clamp(76px, 22vw, 92px);
+      }
+
+      /* PHOTOGRAPHY FOOTER: size the actual visual rows, then center their
+         combined height inside the rectangle. Transforms no longer leave an
+         invisible oversized layout box above or below the artwork. */
+      .photo-footer {
+        height: clamp(150px, 38vw, 168px);
+        min-height: 150px;
+      }
+      .photo-footer-inner {
+        height: 100%;
+        display: grid;
+        grid-template-rows: 53px 24px;
+        align-content: center;
+        justify-items: center;
+        row-gap: 4px;
+        padding: 0;
+      }
+      .photo-footer-title {
+        width: max-content;
+        height: 53px;
+        transform: scale(0.78);
+        transform-origin: center center;
+        margin: 0;
+      }
+      .photo-footer-socials {
+        height: 24px;
+        position: static;
+        top: auto;
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .photo-footer-inner { grid-template-rows: 42px 24px; }
+      .photo-footer-title {
+        height: 42px;
+        transform: scale(0.62);
+      }
+    }
+
+
+    /* ══ MOBILE ABOUT ALIGNMENT — exact responsive seam ══ */
+    @media (max-width: 640px) {
+      /* The seam is supplied in pixels by the measurement script below. */
+      .about-panels {
+        --mobile-seam: 37.5%;
+        background: linear-gradient(to right,
+          #012341 0 var(--mobile-seam),
+          #003557 var(--mobile-seam) 100%);
+      }
+
+      /* Keep the grid boundary on the exact same measured seam. */
+      .about-heading {
+        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
+      }
+
+      /* Move the complete title artwork 12px right without moving the seam. */
+      .about-heading > .about-italic,
+      .about-heading > .about-me-wrap {
+        position: relative;
+        left: 12px;
+      }
+
+      /* Move all body copy and both buttons 12px right as one unit. */
+      .about-copy-stack {
+        position: relative;
+        left: 12px;
+        width: calc(100% - 12px);
+        max-width: calc(100% - 12px);
+      }
+
+      /* Keep both buttons on one row so their midpoint is measurable. */
+      .about-buttons {
+        flex-wrap: nowrap;
+      }
+    }
+
+
+    /* ══ PHONE ABOUT REFINEMENTS — spacing, type, and exact button centering ══ */
+    @media (max-width: 640px) {
+      .about-panels {
+        --mobile-about-gap: 36px;
+      }
+
+      /* Equal box-to-box spacing above the first paragraph and above the buttons. */
+      .about-copy-stack {
+        margin-top: var(--mobile-about-gap) !important;
+      }
+
+      .about-buttons {
+        margin-top: var(--mobile-about-gap) !important;
+      }
+
+      /* The previous phone body size was 15.5px; increase it by exactly 4px. */
+      .about-text {
+        font-size: 19.5px !important;
+      }
+
+      /* Center the label box geometrically inside each button. */
+      .btn-photo,
+      .btn-contact {
+        position: relative;
+        display: grid;
+        place-items: center;
+        padding-left: 12px;
+        padding-right: 12px;
+        text-align: center;
+      }
+
+      .btn-photo .btn-label,
+      .btn-contact .btn-label {
+        display: block;
+        width: max-content;
+        margin: 0;
+        line-height: 1;
+        text-align: center;
+      }
     }
 
 </style>
@@ -1330,7 +1798,8 @@
 <div class="home-photo">
 <div class="photo-prev" onclick="prevImg()"></div>
 <div class="photo-next" onclick="nextImg()"></div>
-<img alt="Vivian at Baker Beach" id="home-img" src="IMG_4595.jpg"/>
+<img alt="Vivian at Baker Beach" class="home-slide active" id="home-img-a" src="IMG_4595.jpg"/>
+<img alt="Vivian portfolio slideshow" class="home-slide" id="home-img-b" src="untitled-1572.jpg"/>
 <div class="home-dots">
 <button class="home-dot active" onclick="setHomeImg(0)"></button>
 <button class="home-dot" onclick="setHomeImg(1)"></button>
@@ -1392,8 +1861,8 @@
         I'm a student studying <strong>cognitive science at UC Berkeley</strong>, with a strong interest in how people experience the world around them. I teach the <strong>photography principles decal</strong> (class) where I get to share both the technical skills and the ways photography can be used to connect people together.
       </p>
 <div class="about-buttons">
-<button class="btn-photo" onclick="showPage('photography')">photography</button>
-<button class="btn-contact" onclick="showPage('contact')">contact</button>
+<button class="btn-photo" onclick="showPage('photography')"><span class="btn-label">photography</span></button>
+<button class="btn-contact" onclick="showPage('contact')"><span class="btn-label">contact</span></button>
 </div>
 </div></div>
 
@@ -1780,7 +2249,7 @@
 <form action="https://formspree.io/f/YOUR_FORM_ID" id="contact-form" method="POST" onsubmit="handleSubmit(event)">
 <div class="contact-fields">
 <input class="field-input" name="name" placeholder="NAME" required="" type="text"/>
-<input class="field-input" name="email" placeholder="EMAIL" required="" type="email" autocapitalize="off" autocorrect="off" spellcheck="false"/>
+<input class="field-input" name="email" placeholder="EMAIL" required="" type="email"/>
 <textarea class="field-input" name="message" placeholder="MESSAGE" required=""></textarea>
 <button class="submit-btn" type="submit">SUBMIT</button>
 <p class="form-success" id="form-success">Thanks! I'll be in touch soon ✦</p>
@@ -1818,6 +2287,7 @@
       document.body.classList.add('cat-' + cat);
     }
     if (name === 'home' && previousPage !== 'home') {
+      requestedHomeIndex = 0;
       setHomeImg(0);
     }
     window.scrollTo(0,0);
@@ -1826,25 +2296,91 @@
   // Home image cycling
   const homeImgs = ['IMG_4595.jpg','untitled-1572.jpg','untitled-1668.jpg','untitled-1710.jpg'];
   let curImg = 0;
+  let requestedHomeIndex = 0;
+  let activeHomeLayer = 0;
+  let homeTransitioning = false;
+
+  function normalizeHomeIndex(i) {
+    return (i + homeImgs.length) % homeImgs.length;
+  }
+
+  function processHomeImageQueue() {
+    if (homeTransitioning || requestedHomeIndex === curImg) return;
+
+    const nextIndex = requestedHomeIndex;
+    const slides = [document.getElementById('home-img-a'), document.getElementById('home-img-b')];
+    const currentSlide = slides[activeHomeLayer];
+    const nextLayer = activeHomeLayer === 0 ? 1 : 0;
+    const nextSlide = slides[nextLayer];
+
+    homeTransitioning = true;
+    nextSlide.onload = null;
+    nextSlide.src = homeImgs[nextIndex];
+    nextSlide.alt = 'Vivian portfolio photo ' + (nextIndex + 1);
+
+    const reveal = () => {
+      nextSlide.classList.add('active');
+      currentSlide.classList.remove('active');
+      curImg = nextIndex;
+      activeHomeLayer = nextLayer;
+      document.querySelectorAll('.home-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === curImg);
+      });
+
+      window.setTimeout(() => {
+        homeTransitioning = false;
+        processHomeImageQueue();
+      }, 700);
+      startHomeInterval();
+    };
+
+    if (nextSlide.complete && nextSlide.naturalWidth) {
+      requestAnimationFrame(() => requestAnimationFrame(reveal));
+    } else {
+      nextSlide.onload = () => requestAnimationFrame(() => requestAnimationFrame(reveal));
+    }
+  }
 
   function setHomeImg(i) {
-    curImg = (i + homeImgs.length) % homeImgs.length;
-    const img = document.getElementById('home-img');
-    img.style.opacity = 0;
-    setTimeout(() => { img.src = homeImgs[curImg]; img.style.opacity = 1; }, 300);
-    document.querySelectorAll('.home-dot').forEach((d,idx) => d.classList.toggle('active', idx===curImg));
-    startHomeInterval();
+    requestedHomeIndex = normalizeHomeIndex(i);
+    processHomeImageQueue();
   }
-  function nextImg() { setHomeImg(curImg + 1); }
-  function prevImg() { setHomeImg(curImg - 1); }
+
+  function nextImg() {
+    requestedHomeIndex = normalizeHomeIndex(requestedHomeIndex + 1);
+    processHomeImageQueue();
+  }
+
+  function prevImg() {
+    requestedHomeIndex = normalizeHomeIndex(requestedHomeIndex - 1);
+    processHomeImageQueue();
+  }
 
   // Auto-cycle (restartable so manual navigation resets the countdown)
   let homeInterval;
   function startHomeInterval() {
     clearInterval(homeInterval);
-    homeInterval = setInterval(() => setHomeImg(curImg + 1), 4500);
+    homeInterval = setInterval(() => nextImg(), 4500);
   }
   startHomeInterval();
+
+  // Touch swipe navigation on the home slideshow
+  const homePhoto = document.querySelector('.home-photo');
+  let touchStartX = 0;
+  let touchStartY = 0;
+  homePhoto.addEventListener('touchstart', (e) => {
+    const touch = e.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+  homePhoto.addEventListener('touchend', (e) => {
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+      dx < 0 ? nextImg() : prevImg();
+    }
+  }, { passive: true });
 
   // Arrow key navigation
   document.addEventListener('keydown', e => {
@@ -1915,5 +2451,56 @@
     } catch(err) { alert('Something went wrong. Please email vivian.shen@berkeley.edu directly!'); }
   }
 </script>
+
+<script>
+  /* Place the blue seam at the exact midpoint of the visible gap between
+     the Photography and Contact buttons on every phone width. */
+  (() => {
+    const MOBILE_MAX = 640;
+
+    function setExactAboutSeam() {
+      const panel = document.querySelector('.about-panels');
+      const photo = document.querySelector('.about-buttons .btn-photo');
+      const contact = document.querySelector('.about-buttons .btn-contact');
+      if (!panel || !photo || !contact || window.innerWidth > MOBILE_MAX) return;
+
+      const panelRect = panel.getBoundingClientRect();
+      const photoRect = photo.getBoundingClientRect();
+      const contactRect = contact.getBoundingClientRect();
+      if (!panelRect.width || !photoRect.width || !contactRect.width) return;
+
+      const gapMidpoint = (photoRect.right + contactRect.left) / 2;
+      const seamFromPanelLeft = gapMidpoint - panelRect.left;
+      panel.style.setProperty('--mobile-seam', `${seamFromPanelLeft.toFixed(2)}px`);
+    }
+
+    function scheduleSeamMeasurement() {
+      requestAnimationFrame(() => requestAnimationFrame(setExactAboutSeam));
+    }
+
+    window.addEventListener('resize', scheduleSeamMeasurement, { passive: true });
+    window.addEventListener('orientationchange', scheduleSeamMeasurement, { passive: true });
+    window.addEventListener('load', scheduleSeamMeasurement);
+    document.addEventListener('DOMContentLoaded', scheduleSeamMeasurement);
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleSeamMeasurement);
+    }
+
+    const about = document.getElementById('about');
+    if (about) {
+      new MutationObserver(scheduleSeamMeasurement).observe(about, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+
+    const buttons = document.querySelector('.about-buttons');
+    if (buttons && 'ResizeObserver' in window) {
+      new ResizeObserver(scheduleSeamMeasurement).observe(buttons);
+    }
+  })();
+</script>
+
 </body>
 </html>
