@@ -1779,14 +1779,44 @@
     }
 
 
+    /* Requested final adjustments */
+    @media (max-width: 640px) {
+      /* Move both About-page buttons down exactly 4px. */
+      .about-buttons {
+        margin-top: 40px !important;
+      }
+    }
 
-/* Phone only: move About body text up by 8px */
-@media (max-width:640px){
-  .about-copy-stack{
-    margin-top: calc(36px - 8px) !important;
-    transform: translateY(-8px);
-  }
-}
+    @media (min-width: 901px) {
+      /* Preserve the original computer About heading exactly. */
+      .about-heading {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        height: 125px;
+        margin-left: var(--content-left);
+        transform: translateY(26px);
+      }
+
+      .about-italic {
+        width: var(--about-width);
+        flex: 0 0 var(--about-width);
+        padding: 0;
+        font-size: 100px;
+        line-height: 1;
+        text-align: left;
+        transform: translateY(19px);
+      }
+
+      .about-me-wrap {
+        width: 111px;
+        height: 81px;
+        flex: 0 0 111px;
+        margin-left: 0;
+        position: static;
+        transform: translateY(8px);
+      }
+    }
 
 </style>
 </link></head>
