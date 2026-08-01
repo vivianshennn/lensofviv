@@ -1728,10 +1728,23 @@
     }
 
 
-/* Move About page buttons down 12px on phones only */
+
+/* Phone-only refinements */
 @media (max-width:640px){
-  .about-buttons{
-    margin-top: calc(41px + 12px) !important;
+  /* Increase ABOUT + ME by ~4px while preserving position */
+  .about-italic{
+    font-size: calc(clamp(48px, 14vw, 56px) + 4px) !important;
+  }
+  .about-me-wrap{
+    width: calc(clamp(66px, 21vw, 80px) + 5.48px) !important;
+    height: calc((clamp(66px, 21vw, 80px) + 5.48px) * 81 / 111) !important;
+    flex-basis: calc(clamp(66px, 21vw, 80px) + 5.48px) !important;
+  }
+
+  /* Center "Photography" label slightly better */
+  .btn-photo .btn-label{
+    position: relative;
+    left: 2px;
   }
 }
 
