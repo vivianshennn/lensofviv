@@ -1659,7 +1659,6 @@
       .about-heading > .about-me-wrap {
         position: relative;
         left: 12px;
-        top: 12px;
       }
 
       /* Move all body copy and both buttons 12px right as one unit. */
@@ -2436,7 +2435,7 @@
       const meGap = meArtwork.getBoundingClientRect().left - seamX;
       const currentMargin = parseFloat(getComputedStyle(meWrap).marginLeft) || 0;
 
-      meWrap.style.marginLeft = `${(currentMargin + aboutGap - meGap - 4).toFixed(2)}px`;
+      meWrap.style.marginLeft = `${(currentMargin + aboutGap - meGap).toFixed(2)}px`;
     }
 
     function scheduleSeamMeasurement() {
