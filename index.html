@@ -1596,7 +1596,7 @@
       }
       .about-me-wrap {
         margin-left: 12px;
-        width: calc(clamp(76px, 22vw, 92px) + 10.963px);
+        width: calc(clamp(76px, 22vw, 92px) + 21.926px);
       }
 
       /* PHOTOGRAPHY FOOTER: size the actual visual rows, then center their
@@ -1659,6 +1659,7 @@
       .about-heading > .about-me-wrap {
         position: relative;
         left: 12px;
+        top: 12px;
       }
 
       /* Move all body copy and both buttons 12px right as one unit. */
@@ -2435,7 +2436,7 @@
       const meGap = meArtwork.getBoundingClientRect().left - seamX;
       const currentMargin = parseFloat(getComputedStyle(meWrap).marginLeft) || 0;
 
-      meWrap.style.marginLeft = `${(currentMargin + aboutGap - meGap).toFixed(2)}px`;
+      meWrap.style.marginLeft = `${(currentMargin + aboutGap - meGap - 4).toFixed(2)}px`;
     }
 
     function scheduleSeamMeasurement() {
