@@ -1840,7 +1840,24 @@
     top:0 !important;
   }
 }
+/* FINAL MOBILE ABOUT POSITION FIXES */
+@media (max-width: 640px) {
+  /* Move ME 4px left from its current final position */
+  #about .about-heading > .about-me-wrap {
+    margin-left: 8px !important;
+  }
 
+  /* Stop the paragraph container from moving the buttons */
+  #about .about-copy-stack {
+    transform: none !important;
+  }
+
+  /* Move only the two paragraphs up 4px */
+  #about .about-copy-stack > .about-text {
+    position: relative !important;
+    top: -4px !important;
+  }
+}
 </style>
 </link></head>
 <body class="page-home">
