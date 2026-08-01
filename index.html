@@ -1596,7 +1596,7 @@
       }
       .about-me-wrap {
         margin-left: 12px;
-        width: calc(clamp(76px, 22vw, 92px) + 21.926px);
+        width: clamp(76px, 22vw, 92px);
       }
 
       /* PHOTOGRAPHY FOOTER: size the actual visual rows, then center their
@@ -1726,6 +1726,24 @@
         text-align: center;
       }
     }
+
+
+
+/* ONLY enlarge the ME artwork by 8px on phones. Do not move ABOUT. */
+@media (max-width:640px){
+  .about-me-wrap{
+    width:75px !important;
+    height:57px !important;
+    flex-basis:75px !important;
+    margin-left:14px !important;
+    transform:translateY(2px) !important;
+  }
+  .about-me-wrap .offset-heading-svg{
+    width:100%;
+    height:100%;
+    display:block;
+  }
+}
 
 </style>
 </link></head>
@@ -2421,21 +2439,6 @@
       const gapMidpoint = (photoRect.right + contactRect.left) / 2;
       const seamFromPanelLeft = gapMidpoint - panelRect.left;
       panel.style.setProperty('--mobile-seam', `${seamFromPanelLeft.toFixed(2)}px`);
-
-      const aboutText = document.querySelector('.about-heading .about-italic');
-      const meWrap = document.querySelector('.about-heading .about-me-wrap');
-      const meArtwork = meWrap && meWrap.querySelector('svg path');
-      if (!aboutText || !meWrap || !meArtwork) return;
-
-      const aboutRange = document.createRange();
-      aboutRange.selectNodeContents(aboutText);
-
-      const seamX = panelRect.left + seamFromPanelLeft;
-      const aboutGap = seamX - aboutRange.getBoundingClientRect().right;
-      const meGap = meArtwork.getBoundingClientRect().left - seamX;
-      const currentMargin = parseFloat(getComputedStyle(meWrap).marginLeft) || 0;
-
-      meWrap.style.marginLeft = `${(currentMargin + aboutGap - meGap).toFixed(2)}px`;
     }
 
     function scheduleSeamMeasurement() {
