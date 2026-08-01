@@ -1812,36 +1812,32 @@
 }
 
 
-/* MOBILE ONLY: Photography tabs and footer refinements */
-@media (max-width: 640px) {
-  /* Make the Photography category navigation 8px larger */
-  #photography .photo-tab {
-    font-size: 27px !important;
+/* ===== Mobile Photography refinements only ===== */
+@media (max-width:640px){
+
+  /* Photography category navigation: 4px smaller */
+  #photography .photo-tab{
+    font-size:20px !important;
   }
 
-  /* Add 4px more space and center the whole footer group vertically */
-  #photography .photo-footer-inner {
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 24px !important;
+  /* Footer: reduce title/icons gap by 4px and center vertically */
+  #photography .photo-footer-inner{
+    display:flex;
+    flex-direction:column;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:16px !important;
+    height:100%;
   }
 
   #photography .photo-footer-title,
-  #photography .photo-footer-socials {
-    margin: 0 auto !important;
-    justify-content: center !important;
-    align-items: center !important;
+  #photography .photo-footer-socials{
+    margin:0 !important;
   }
 
-  #photography .photo-footer-socials {
-    top: 0 !important;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Existing phone size was 16px, so this is exactly 8px larger */
-  #photography .photo-tab {
-    font-size: 24px !important;
+  /* Remove previous upward offset so the group is truly centered */
+  #photography .photo-footer-socials{
+    top:0 !important;
   }
 }
 
