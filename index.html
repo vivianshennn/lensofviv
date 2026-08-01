@@ -1740,16 +1740,28 @@
     /* ══ PHONE ABOUT REFINEMENTS — spacing, type, and exact button centering ══ */
     @media (max-width: 640px) {
       .about-panels {
-        --mobile-about-gap: 36px;
+        --mobile-heading-copy-gap: 28px;
+        --mobile-copy-buttons-gap: 36px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        padding-top: 36px !important;
+        padding-bottom: 36px !important;
+      }
+
+      /* Vertically center the complete About composition inside the blue section. */
+      .about-layout-stack {
+        width: 100%;
+        flex: 0 0 auto;
       }
 
       /* Equal box-to-box spacing above the first paragraph and above the buttons. */
       .about-copy-stack {
-        margin-top: var(--mobile-about-gap) !important;
+        margin-top: var(--mobile-heading-copy-gap) !important;
       }
 
       .about-buttons {
-        margin-top: var(--mobile-about-gap) !important;
+        margin-top: var(--mobile-copy-buttons-gap) !important;
       }
 
       /* The previous phone body size was 15.5px; increase it by exactly 4px. */
