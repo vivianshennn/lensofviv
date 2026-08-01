@@ -1779,13 +1779,10 @@
     }
 
 
-/* Restore desktop ABOUT spacing only */
-@media (min-width:901px){
-  .about-heading{
-    gap:30px !important;
-  }
-  .about-me-wrap{
-    margin-left:4px !important;
+/* Phone only: move About body paragraphs up 8px */
+@media (max-width:640px){
+  .about-copy-stack{
+    transform: translateY(-8px) !important;
   }
 }
 
