@@ -1804,6 +1804,28 @@
   }
 }
 
+
+/* FINAL PHONE-ONLY FIXES */
+@media (max-width: 640px) {
+  /* Move the entire two-paragraph block up exactly 4px. */
+  #about .about-copy-stack {
+    position: relative;
+    top: -4px;
+  }
+
+  /* Keep the Photography button in place and center only its label visually. */
+  #about .btn-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #about .btn-photo .btn-label {
+    position: relative;
+    left: 2px;
+  }
+}
+
 </style>
 </link></head>
 <body class="page-home">
