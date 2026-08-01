@@ -1223,20 +1223,6 @@
       .home-text-group { transform: scale(0.52); }
     }
 
-    /* ── ABOUT ── */
-    @media (max-width: 480px) {
-      .about-photo { height: 50vh; min-height: 320px; }
-      .about-panels { padding: 28px 26px 36px; min-height: 460px; }
-      .about-heading { gap: 10px; }
-      .about-italic { font-size: 44px; }
-      .about-me-wrap { width: 50px; height: 37px; flex-basis: 50px; }
-      .about-copy-stack { margin-top: 36px; max-width: 92%; }
-      .about-text { font-size: 12px; }
-      .about-buttons { gap: 14px; margin-top: 36px; }
-      .btn-photo, .btn-contact { font-size: 13px; padding: 4px 12px; height: 30px; }
-      .btn-photo { width: auto; min-width: 0; }
-    }
-
     /* ── PHOTOGRAPHY: hero + tabs + footer ── */
     @media (max-width: 600px) {
       .photo-tabs { gap: 20px; flex-wrap: wrap; row-gap: 8px; margin-top: 32px; }
@@ -1312,11 +1298,6 @@
     body.page-photography #photography,
     body.page-photography .photo-footer { margin-bottom: 0; padding-bottom: 0; }
     body.page-photography #photography { min-height: 0; }
-
-    @media (max-width: 640px) {
-      html, body { width: 100%; }
-      body.page-home,
-      body.page-contact { overflow: hidden; }
 
       /* Landing page: preserve the photo area and shorten only the green panel. */
       #home { height: 100dvh; min-height: 100dvh; overflow: hidden; }
@@ -1414,48 +1395,6 @@
       #contact .contact-info { margin-bottom: 7px; }
       #contact .contact-info-block p { font-size: 10px; letter-spacing: 1.3px; }
     }
-
-
-    /* ══ REQUESTED PHONE REFINEMENTS — v2 ══ */
-    @media (max-width: 640px) {
-      /* HOME: center the visible, scaled artwork itself—not its original 338×221 box. */
-      #home .home-text { position: relative; }
-      #home .home-text-group {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin: 0;
-        transform: translate(-50%, -50%) scale(0.56);
-        transform-origin: center center;
-      }
-
-      /* ABOUT: restore the original one-third seam and keep each word on its own blue. */
-      .about-panels {
-        --mobile-seam: 33.333%;
-        background: linear-gradient(to right,
-          #012341 0 var(--mobile-seam),
-          #003557 var(--mobile-seam) 100%);
-      }
-      .about-heading {
-        grid-template-columns: var(--mobile-seam) calc(100% - var(--mobile-seam));
-        min-height: 82px;
-      }
-      .about-italic {
-        width: 100%;
-        padding: 0 8px 0 4px;
-        font-size: clamp(54px, 15vw, 64px);
-        line-height: 0.9;
-        text-align: right;
-        white-space: nowrap;
-        transform: translateY(7px);
-      }
-      .about-me-wrap {
-        width: clamp(74px, 22vw, 92px);
-        height: auto;
-        flex-basis: auto;
-        margin-left: 12px;
-        transform: translateY(2px);
-      }
 
       /* PHOTOGRAPHY: pull the icons four pixels closer while centering the group. */
       .photo-footer-inner { gap: 16px; }
@@ -1754,26 +1693,28 @@
 
       /* The previous phone body size was 15.5px; increase it by exactly 4px. */
       .about-text {
-        font-size: 19.5px !important;
+        font-size: 16px !important;
       }
 
-      /* Center the label box geometrically inside each button. */
+      /* Center both labels; only the Photography button is slightly narrower. */
       .btn-photo,
       .btn-contact {
         position: relative;
         display: grid;
         place-items: center;
-        padding-left: 12px;
-        padding-right: 12px;
         text-align: center;
       }
 
-      /* Narrow only the Photography button by 12px total.
-         The existing measurement script automatically moves the blue seam
-         6px left, keeping it centered between the two buttons. */
       .btn-photo {
-        padding-left: 6px;
-        padding-right: 6px;
+        width: auto;
+        min-width: 0;
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+
+      .btn-contact {
+        padding-left: 12px;
+        padding-right: 12px;
       }
 
       .btn-photo .btn-label,
