@@ -1112,14 +1112,14 @@
     .contact-fields { --form-width:599px; width:var(--form-width); display:flex; flex-direction:column; gap:10px; }
     .field-input {
       font-family: 'ivymode', sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 2px;
-      text-transform: lowercase;
       background: transparent; border: 1px solid #FFF; border-radius: 4px;
       color: #FFFFFF; height: 40px; padding: 0 14px; outline: none; width: 100%; resize: none;
       transition: border-color 0.2s;
       width: var(--form-width);
     }
     .field-input::placeholder {
-      text-transform: lowercase; color: #FFFFFF; font-family: 'ivymode', sans-serif; font-size: 12px; letter-spacing: 2px; }
+       text-transform: none;
+      color: #FFFFFF; font-family: 'ivymode', sans-serif; font-size: 12px; letter-spacing: 2px; }
     .field-input:focus { border-color: #FFFFFF; }
     textarea.field-input { width: var(--form-width); height: 100px; padding: 12px 14px; }
     .submit-btn{ width: var(--form-width); }
@@ -2349,9 +2349,9 @@
 <!-- Formspree form — replace YOUR_FORM_ID with your actual Formspree ID -->
 <form action="https://formspree.io/f/YOUR_FORM_ID" id="contact-form" method="POST" onsubmit="handleSubmit(event)">
 <div class="contact-fields">
-<input class="field-input" name="name" placeholder="NAME" required="" type="text"/>
-<input class="field-input" name="email" placeholder="EMAIL" required="" type="email"/>
-<textarea class="field-input" name="message" placeholder="MESSAGE" required=""></textarea>
+<input class="field-input" name="name" placeholder="Name" required="" type="text"/>
+<input class="field-input" name="email" placeholder="Email" required="" type="email"/>
+<textarea class="field-input" name="message" placeholder="Message" required=""></textarea>
 <button class="submit-btn" type="submit">SUBMIT</button>
 <p class="form-success" id="form-success">Thanks! I'll be in touch soon ✦</p>
 </div>
