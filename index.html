@@ -1112,13 +1112,14 @@
     .contact-fields { --form-width:599px; width:var(--form-width); display:flex; flex-direction:column; gap:10px; }
     .field-input {
       font-family: 'ivymode', sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 2px;
-      text-transform: uppercase;
+      text-transform: lowercase;
       background: transparent; border: 1px solid #FFF; border-radius: 4px;
       color: #FFFFFF; height: 40px; padding: 0 14px; outline: none; width: 100%; resize: none;
       transition: border-color 0.2s;
       width: var(--form-width);
     }
-    .field-input::placeholder { color: #FFFFFF; font-family: 'ivymode', sans-serif; font-size: 12px; letter-spacing: 2px; }
+    .field-input::placeholder {
+      text-transform: lowercase; color: #FFFFFF; font-family: 'ivymode', sans-serif; font-size: 12px; letter-spacing: 2px; }
     .field-input:focus { border-color: #FFFFFF; }
     textarea.field-input { width: var(--form-width); height: 100px; padding: 12px 14px; }
     .submit-btn{ width: var(--form-width); }
@@ -2352,7 +2353,7 @@
 <input class="field-input" name="email" placeholder="EMAIL" required="" type="email"/>
 <textarea class="field-input" name="message" placeholder="MESSAGE" required=""></textarea>
 <button class="submit-btn" type="submit">SUBMIT</button>
-<p class="form-success" id="form-success">Thank you! I'll be in touch soon :)</p>
+<p class="form-success" id="form-success">Thanks! I'll be in touch soon ✦</p>
 </div>
 </form>
 </div>
